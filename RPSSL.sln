@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RPSSL.Api", "RPSSL.Api\RPSSL.Api.csproj", "{1BDEFEA9-BCCD-4E32-91F7-8708FB0E24AE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RPSSL.Application", "RPSSL.Application\RPSSL.Application.csproj", "{EED41CF2-1B68-49E1-9E1E-97A44B7DE7CC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RPSSL.Domain", "RPSSL.Domain\RPSSL.Domain.csproj", "{155A3090-7C8D-415D-AB0A-D6B18D063EDC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RPSSL.Infrastructure", "RPSSL.Infrastructure\RPSSL.Infrastructure.csproj", "{EE3AB469-F514-4F79-8321-E6C9F93760B8}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1BDEFEA9-BCCD-4E32-91F7-8708FB0E24AE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1BDEFEA9-BCCD-4E32-91F7-8708FB0E24AE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1BDEFEA9-BCCD-4E32-91F7-8708FB0E24AE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1BDEFEA9-BCCD-4E32-91F7-8708FB0E24AE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EED41CF2-1B68-49E1-9E1E-97A44B7DE7CC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EED41CF2-1B68-49E1-9E1E-97A44B7DE7CC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EED41CF2-1B68-49E1-9E1E-97A44B7DE7CC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EED41CF2-1B68-49E1-9E1E-97A44B7DE7CC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{155A3090-7C8D-415D-AB0A-D6B18D063EDC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{155A3090-7C8D-415D-AB0A-D6B18D063EDC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{155A3090-7C8D-415D-AB0A-D6B18D063EDC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{155A3090-7C8D-415D-AB0A-D6B18D063EDC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EE3AB469-F514-4F79-8321-E6C9F93760B8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EE3AB469-F514-4F79-8321-E6C9F93760B8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EE3AB469-F514-4F79-8321-E6C9F93760B8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EE3AB469-F514-4F79-8321-E6C9F93760B8}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
