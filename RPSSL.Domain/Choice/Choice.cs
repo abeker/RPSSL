@@ -1,23 +1,10 @@
-﻿using CSharpFunctionalExtensions;
-using RPSSL.Domain.Common.Errors;
+﻿namespace RPSSL.Domain.Choice;
 
-namespace RPSSL.Domain.Choice;
-
-public class Choice : Entity
+public enum Choice
 {
-    public ChoiceId Id { get; private set; }
-    public string Name { get; private set; }
-    
-    private Choice(ChoiceId id, string name)
-    {
-        Id = id;
-        Name = name;
-    }
-
-    public static Result<Choice, ErrorList> Create(ChoiceId id, string name)
-    {
-        return string.IsNullOrWhiteSpace(name)
-            ? new EmptyStringError(nameof(Name)).ToList()
-            : new Choice(id, name);
-    }
+    ROCK = 1,
+    PAPER,
+    SCISSORS,
+    LIZARD,
+    SPOCK
 }
