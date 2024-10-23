@@ -1,4 +1,4 @@
-﻿namespace RPSSL.Domain.Game;
+﻿namespace RPSSL.Domain.Games;
 
 public enum GameResult
 {

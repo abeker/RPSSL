@@ -1,10 +1,11 @@
 ﻿using CSharpFunctionalExtensions;
+using RPSSL.Domain.Choices;
 using RPSSL.Domain.Common.Lists;
 using RPSSL.Domain.Common.Models;
-using RPSSL.Domain.Player;
+using RPSSL.Domain.Players;
 using Entity = RPSSL.Domain.Common.Models.Entity;
 
-namespace RPSSL.Domain.Game;
+namespace RPSSL.Domain.Games;
 
 public class Game : Entity
 {
@@ -23,7 +24,7 @@ public class Game : Entity
         return new Game(id, choice, computerChoice);
     }
 
-    public void PlayRound(Choice.Choice choice, Choice.Choice computerChoice)
+    public void PlayRound(Choice choice, Choice computerChoice)
     {
         // TODO: Logic to determine the winner
         Result = GameResult.WIN;;

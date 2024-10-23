@@ -3,7 +3,7 @@ using RPSSL.Domain.Common.Lists;
 using RPSSL.Domain.Common.Models;
 using Entity = RPSSL.Domain.Common.Models.Entity;
 
-namespace RPSSL.Domain.Player;
+namespace RPSSL.Domain.Players;
 
 public class Player : Entity
 {

@@ -3,7 +3,7 @@ using RPSSL.Domain.Common.Errors;
 using RPSSL.Domain.Common.Errors.Extensions;
 using RPSSL.Domain.Common.Lists;
 
-namespace RPSSL.Domain.Player;
+namespace RPSSL.Domain.Players;
 
 public class PlayerName : ValueObject
 {

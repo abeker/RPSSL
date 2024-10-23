@@ -3,7 +3,7 @@ using RPSSL.Domain.Common.Lists;
 using RPSSL.Domain.Common.Models;
 using Entity = RPSSL.Domain.Common.Models.Entity;
 
-namespace RPSSL.Domain.Choice;
+namespace RPSSL.Domain.Choices;
 
 public class Choice : Entity
 {

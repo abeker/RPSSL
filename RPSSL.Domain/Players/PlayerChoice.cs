@@ -1,20 +1,21 @@
 ﻿using CSharpFunctionalExtensions;
+using RPSSL.Domain.Choices;
 using RPSSL.Domain.Common.Lists;
 
-namespace RPSSL.Domain.Player;
+namespace RPSSL.Domain.Players;
 
 public class PlayerChoice : ValueObject
 {
     public Player Player { get; }
-    public Choice.Choice Choice { get; }
+    public Choice Choice { get; }
 
-    private PlayerChoice(Player player, Choice.Choice choice)
+    private PlayerChoice(Player player, Choice choice)
     {
         Player = player;
         Choice = choice;
     }
 
-    public static Result<PlayerChoice, ErrorList> Create(Player player, Choice.Choice choice)
+    public static Result<PlayerChoice, ErrorList> Create(Player player, Choice choice)
     {
         return new PlayerChoice(player, choice);
     }
