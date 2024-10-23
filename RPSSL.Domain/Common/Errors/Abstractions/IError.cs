@@ -1,4 +1,4 @@
-﻿namespace RPSSL.Domain.Common.Errors;
+﻿namespace RPSSL.Domain.Common.Errors.Abstractions;
 
 public interface IError
 {

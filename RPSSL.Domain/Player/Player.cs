@@ -1,5 +1,5 @@
 ﻿using CSharpFunctionalExtensions;
-using RPSSL.Domain.Common.Errors;
+using RPSSL.Domain.Common.Lists;
 using RPSSL.Domain.Common.Models;
 using Entity = RPSSL.Domain.Common.Models.Entity;
 
@@ -7,17 +7,15 @@ namespace RPSSL.Domain.Player;
 
 public class Player : Entity
 {
-    public string Name { get; }
+    public PlayerName Name { get; }
 
-    private Player(EntityId id, string name) : base(id)
+    private Player(EntityId id, PlayerName name) : base(id)
     {
         Name = name;
     }
     
-    public static Result<Player, ErrorList> Create(EntityId id, string name)
+    public static Result<Player, ErrorList> Create(EntityId id, PlayerName name)
     {
-        return string.IsNullOrWhiteSpace(name)
-            ? new EmptyStringError(nameof(Name)).ToList()
-            : new Player(id, name);
+        return new Player(id, name);
     }
 }

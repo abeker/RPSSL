@@ -1,4 +1,4 @@
-﻿namespace RPSSL.Domain.Common.Errors;
+﻿namespace RPSSL.Domain.Common.Errors.Codes;
 
 internal static class ErrorCodes
 {

@@ -1,4 +1,7 @@
-﻿namespace RPSSL.Domain.Common.Errors;
+﻿using RPSSL.Domain.Common.Errors.Abstractions;
+using RPSSL.Domain.Common.Lists;
+
+namespace RPSSL.Domain.Common.Errors.Extensions;
 
 public static class ErrorExtensions
 {

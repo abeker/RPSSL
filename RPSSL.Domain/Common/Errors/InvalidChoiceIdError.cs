@@ -1,4 +1,7 @@
-﻿namespace RPSSL.Domain.Common.Errors;
+﻿using RPSSL.Domain.Common.Errors.Abstractions;
+using RPSSL.Domain.Common.Errors.Codes;
+
+namespace RPSSL.Domain.Common.Errors;
 
 public class InvalidChoiceIdError(int invalidChoiceId) : IError
 {

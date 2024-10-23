@@ -1,23 +1,24 @@
 ﻿using CSharpFunctionalExtensions;
-using RPSSL.Domain.Common.Errors;
+using RPSSL.Domain.Common.Lists;
 using RPSSL.Domain.Common.Models;
+using RPSSL.Domain.Player;
 using Entity = RPSSL.Domain.Common.Models.Entity;
 
 namespace RPSSL.Domain.Game;
 
 public class Game : Entity
 {
-    public Choice.Choice PlayerChoice { get; }
-    public Choice.Choice ComputerChoice { get; }
+    public PlayerChoice PlayerChoice { get; }
+    public PlayerChoice ComputerChoice { get; }
     public GameResult Result { get; private set; }
     
-    private Game(EntityId id, Choice.Choice playerChoice, Choice.Choice computerChoice) : base(id)
+    private Game(EntityId id, PlayerChoice playerChoice, PlayerChoice computerChoice) : base(id)
     {
         PlayerChoice = playerChoice;
         ComputerChoice = computerChoice;
     }
     
-    public static Result<Game, ErrorList> Create(EntityId id, Choice.Choice choice, Choice.Choice computerChoice)
+    public static Result<Game, ErrorList> Create(EntityId id, PlayerChoice choice, PlayerChoice computerChoice)
     {
         return new Game(id, choice, computerChoice);
     }
