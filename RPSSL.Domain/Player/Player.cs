@@ -7,7 +7,7 @@ namespace RPSSL.Domain.Player;
 
 public class Player : Entity
 {
-    public string Name { get; private set; }
+    public string Name { get; }
 
     private Player(EntityId id, string name) : base(id)
     {
