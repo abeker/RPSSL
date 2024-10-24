@@ -3,6 +3,8 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.OpenApi.Models;
+using RPSSL.Api.Common.Errors;
+using RPSSL.Api.Common.Errors.ErrorFactory;
 using RPSSL.Api.Configuration;
 
 namespace RPSSL.Api.Extensions;
@@ -11,6 +13,10 @@ public static class ServiceCollectionExtensions
 {
     public static IServiceCollection AddApi(this IServiceCollection services)
     {
+        services
+            .AddScoped<IErrorFactory, ErrorFactory>()
+            .AddScoped<IErrorResponseFactory, ErrorResponseFactory>();
+        
         services.AddCors(options => {
             options.AddPolicy("CorsPolicy",
                 builder => builder

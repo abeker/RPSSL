@@ -1,4 +1,4 @@
-﻿using RPSSL.Domain.Choices.Persistence;
+﻿using RPSSL.Application.Choices.Persistence;
 
 namespace RPSSL.Infrastructure.Persistence;
 
