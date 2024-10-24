@@ -22,6 +22,6 @@ public class PlayerChoice : ValueObject
     
     protected override IEnumerable<string> GetEqualityComponents()
     {
-        yield return Player.Id + Choice.Id.ToString();
+        yield return Player.Id + Choice.ToString();
     }
 }

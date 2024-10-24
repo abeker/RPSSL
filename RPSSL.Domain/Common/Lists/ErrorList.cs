@@ -5,10 +5,6 @@ namespace RPSSL.Domain.Common.Lists;
 
 public class ErrorList : CombinableList<IError>
 {
-    public ErrorList() : base()
-    {
-    }
-
     public ErrorList(IError error) : base(error)
     {
     }

@@ -5,22 +5,22 @@ using RPSSL.Domain.Common.Lists;
 
 namespace RPSSL.Domain.Choices;
 
-public class ChoiceName : ValueObject
+public class PositiveNumber : ValueObject
 {
-    public string Value { get; }
+    public int Value { get; }
 
-    private ChoiceName(string value)
+    private PositiveNumber(int value)
     {
         Value = value;
     }
     
-    public static Result<ChoiceName, ErrorList> Create(string value)
+    public static Result<PositiveNumber, ErrorList> Create(int value)
     {
-        return string.IsNullOrWhiteSpace(value)
-            ? new EmptyStringError(value).ToList() 
-            : new ChoiceName(value);
+        return value < 1
+            ? new PositiveNumberOutOfRangeError(value).ToList() 
+            : new PositiveNumber(value);
     }
-    
+
     protected override IEnumerable<object> GetEqualityComponents()
     {
         yield return Value;

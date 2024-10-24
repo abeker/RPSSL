@@ -1,8 +1,5 @@
-﻿using CSharpFunctionalExtensions;
-using MediatR;
+﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using RPSSL.Api.Common.Errors;
-using RPSSL.Api.Common.Errors.ErrorFactory;
 using RPSSL.Application.Choices.GetChoices;
 
 namespace RPSSL.Api.Controllers;
@@ -10,7 +7,7 @@ namespace RPSSL.Api.Controllers;
 [Route("api/v{version:apiVersion}/[controller]")]
 [ApiVersion("1.0")]
 [ApiController]
-public class ChoicesController(ISender mediator, IErrorFactory errorFactory, IErrorResponseFactory errorResponseFactory) : ControllerBase
+public class ChoicesController(ISender mediator) : ControllerBase
 {
     /// <summary>
     /// Returns all available choices
@@ -18,10 +15,9 @@ public class ChoicesController(ISender mediator, IErrorFactory errorFactory, IEr
     [HttpGet]
     [ActionName(nameof(GetAsync))]
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IEnumerable<ChoiceResponse>))]
-    public async Task<ActionResult<IEnumerable<ChoiceResponse>>> GetAsync() =>
-        await mediator
-            .Send(new GetChoicesQuery())
-            .Map(s => s)
-            .MapError(errorFactory.From)
-            .Match(onSuccess: Ok, onFailure: errorResponseFactory.From);
+    public async Task<ActionResult<IEnumerable<ChoiceResponse>>> GetAsync()
+    {
+        var choices = await mediator.Send(new GetChoicesQuery());
+        return Ok(choices);
+    }
 }

@@ -1,23 +1,10 @@
-﻿using CSharpFunctionalExtensions;
-using RPSSL.Domain.Common.Lists;
-using RPSSL.Domain.Common.Models;
-using Entity = RPSSL.Domain.Common.Models.Entity;
+﻿namespace RPSSL.Domain.Choices;
 
-namespace RPSSL.Domain.Choices;
-
-public class Choice : Entity
+public enum Choice
 {
-    public ChoiceCode Code { get; }
-    public ChoiceName Name { get; }
-
-    private Choice(EntityId id, ChoiceCode code, ChoiceName name) : base(id)
-    {
-        Code = code;
-        Name = name;
-    }
-
-    public static Result<Choice, ErrorList> Create(EntityId id, ChoiceCode code, ChoiceName name)
-    {
-        return new Choice(id, code, name);
-    }
+    Rock = 1, 
+    Paper,
+    Scissors,
+    Lizard,
+    Spock
 }

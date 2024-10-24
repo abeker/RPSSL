@@ -2,7 +2,7 @@
 
 public enum GameResult
 {
-    WIN,
-    LOSE,
-    TIE
+    Win,
+    Lose,
+    Tie
 }

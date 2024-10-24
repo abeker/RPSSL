@@ -24,7 +24,7 @@ public class ErrorFactory(ILogger<ErrorFactory> logger) : IErrorFactory
         {
             EmptyGuidError emptyGuidError => new Status400Error(emptyGuidError),
             EmptyStringError emptyStringError => new Status400Error(emptyStringError),
-            InvalidChoiceIdError invalidChoiceIdError => new Status400Error(invalidChoiceIdError),
+            PositiveNumberOutOfRangeError invalidChoiceIdError => new Status400Error(invalidChoiceIdError),
             _ => new Status500Error(error),
         };
 

@@ -1,20 +1,17 @@
-﻿using CSharpFunctionalExtensions;
-using MediatR;
-using RPSSL.Domain.Choices.Persistence;
-using RPSSL.Domain.Common.Lists;
+﻿using MediatR;
+using RPSSL.Domain.Choices;
 using Serilog;
 
 namespace RPSSL.Application.Choices.GetChoices;
 
-public class GetChoicesQueryHandler(IChoiceRepository choiceRepository, ILogger logger)
-    : IRequestHandler<GetChoicesQuery, Result<IEnumerable<ChoiceResponse>, ErrorList>>
+public class GetChoicesQueryHandler(ILogger logger) : IRequestHandler<GetChoicesQuery, IEnumerable<ChoiceResponse>>
 {
-    public async Task<Result<IEnumerable<ChoiceResponse>, ErrorList>> Handle(GetChoicesQuery request, CancellationToken cancellationToken)
+    public Task<IEnumerable<ChoiceResponse>> Handle(GetChoicesQuery request, CancellationToken cancellationToken)
     {
-        var fetchedChoices = await choiceRepository.GetAsync(cancellationToken);
-
-        return fetchedChoices
-            .TapError(errosList => logger.Error(errosList.ToString()))
-            .Map(choices => choices.Select(c => new ChoiceResponse(c.Code.Value, c.Name.Value)));
+        logger.Information("Fetching choices");
+        
+        return Task.FromResult(Enum.GetValues(typeof(Choice))
+            .Cast<Choice>()
+            .Select(choice => new ChoiceResponse((int)choice, choice.ToString())));
     }
 }

@@ -27,6 +27,6 @@ public class Game : Entity
     public void PlayRound(Choice choice, Choice computerChoice)
     {
         // TODO: Logic to determine the winner
-        Result = GameResult.WIN;;
+        Result = GameResult.Win;
     }
 }

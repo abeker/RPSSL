@@ -11,7 +11,7 @@ public static class WebApplicationBuilderExtensions
         builder.Services
             .AddApi()
             .AddApplication()
-            .AddInfrastructure();
+            .AddInfrastructure(builder.Configuration);
 
         builder.Host.UseSerilog((hostingContext, loggerConfiguration) =>
             loggerConfiguration
