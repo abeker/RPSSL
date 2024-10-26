@@ -8,6 +8,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RPSSL.Domain", "RPSSL.Domai
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RPSSL.Infrastructure", "RPSSL.Infrastructure\RPSSL.Infrastructure.csproj", "{EE3AB469-F514-4F79-8321-E6C9F93760B8}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{34185AAF-2939-416A-8EF4-04DF4EA6CA08}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RPSSL.Domain.Tests", "tests\RPSSL.Domain.Tests\RPSSL.Domain.Tests.csproj", "{265B8F6B-F288-484B-B847-DA13EA848BCC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -30,5 +34,12 @@ Global
 		{EE3AB469-F514-4F79-8321-E6C9F93760B8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EE3AB469-F514-4F79-8321-E6C9F93760B8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EE3AB469-F514-4F79-8321-E6C9F93760B8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{265B8F6B-F288-484B-B847-DA13EA848BCC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{265B8F6B-F288-484B-B847-DA13EA848BCC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{265B8F6B-F288-484B-B847-DA13EA848BCC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{265B8F6B-F288-484B-B847-DA13EA848BCC}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{265B8F6B-F288-484B-B847-DA13EA848BCC} = {34185AAF-2939-416A-8EF4-04DF4EA6CA08}
 	EndGlobalSection
 EndGlobal

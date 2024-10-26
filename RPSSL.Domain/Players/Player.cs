@@ -7,7 +7,7 @@ namespace RPSSL.Domain.Players;
 
 public class Player : Entity
 {
-    public static readonly Player Computer = new(EntityId.Create(), PlayerName.Create("Computer").Value);
+    public static readonly Player Computer = new(EntityId.Create(Guid.Parse("3F39C3E7-C8CE-40E5-841F-D606273D37A2")).Value, PlayerName.Create("Computer").Value);
     
     public PlayerName Name { get; }
 
@@ -18,6 +18,12 @@ public class Player : Entity
     
     public static Result<Player, ErrorList> Create(EntityId id, PlayerName name)
     {
+        if (id == null)
+            throw new ArgumentException("Player id must be provided");
+        
+        if (name == null)
+            throw new ArgumentException("Player name must be provided");
+        
         return new Player(id, name);
     }
 }

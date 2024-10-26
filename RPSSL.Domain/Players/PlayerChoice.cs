@@ -17,6 +17,9 @@ public class PlayerChoice : ValueObject
 
     public static Result<PlayerChoice, ErrorList> Create(Player player, Choice choice)
     {
+        if (player is null)
+            throw new ArgumentException("Player must be provided");
+        
         return new PlayerChoice(player, choice);
     }
     
