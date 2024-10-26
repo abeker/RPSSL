@@ -1,0 +1,45 @@
+name: Deploy to Server
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    env:
+      DOCKER_FILE_PATH: RPSSL.Api/Dockerfile
+
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v2
+
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v1
+
+    - name: Login to Docker Hub
+      uses: docker/login-action@v1
+      with:
+        username: ${{ secrets.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
+
+    - name: Build and push Docker image
+      uses: docker/build-push-action@v2
+      with:
+        push: true
+        tags: ${{ vars.IMAGE_NAME }}
+        file: ${{ env.DOCKER_FILE_PATH }}
+
+    - name: Deploy to Server
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.HETZNER_HOST }}
+        username: ${{ secrets.HETZNER_USERNAME }}
+        key: ${{ secrets.HETZNER_SSH_KEY }}
+        script: |
+          docker pull ${{ env.IMAGE_NAME }}
+          docker run -d \
+            -e CODECHALLENGEAPI__BASEADDRESS=${{ vars.CODE_CHALLENGE_API_BASE_ADDRESS }} \
+            --rpssl \
+            ${{ env.IMAGE_NAME }}
