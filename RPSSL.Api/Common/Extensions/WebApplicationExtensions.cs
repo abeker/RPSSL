@@ -1,4 +1,4 @@
-﻿namespace RPSSL.Api.Extensions;
+﻿namespace RPSSL.Api.Common.Extensions;
 
 public static class WebApplicationExtensions
 {

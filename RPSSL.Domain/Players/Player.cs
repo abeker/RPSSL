@@ -7,6 +7,8 @@ namespace RPSSL.Domain.Players;
 
 public class Player : Entity
 {
+    public static readonly Player Computer = new(EntityId.Create(), PlayerName.Create("Computer").Value);
+    
     public PlayerName Name { get; }
 
     private Player(EntityId id, PlayerName name) : base(id)

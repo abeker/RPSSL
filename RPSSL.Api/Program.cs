@@ -1,6 +1,6 @@
 ﻿using System.Text;
 using dotenv.net;
-using RPSSL.Api.Extensions;
+using RPSSL.Api.Common.Extensions;
 
 DotEnv.Fluent()
     .WithoutExceptions()

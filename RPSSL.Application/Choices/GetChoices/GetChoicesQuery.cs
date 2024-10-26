@@ -2,4 +2,4 @@
 
 namespace RPSSL.Application.Choices.GetChoices;
 
-public class GetChoicesQuery : IQuery<IEnumerable<ChoiceResponse>>;
+public record GetChoicesQuery : IQuery<IEnumerable<ChoiceResponse>>;

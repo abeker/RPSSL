@@ -1,8 +1,8 @@
-﻿using RPSSL.Application.Extensions;
-using RPSSL.Infrastructure.Extensions;
+﻿using RPSSL.Application.Common.Extensions;
+using RPSSL.Infrastructure.Common.Extensions;
 using Serilog;
 
-namespace RPSSL.Api.Extensions;
+namespace RPSSL.Api.Common.Extensions;
 
 public static class WebApplicationBuilderExtensions
 {

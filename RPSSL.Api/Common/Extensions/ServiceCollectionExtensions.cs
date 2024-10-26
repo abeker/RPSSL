@@ -7,7 +7,7 @@ using RPSSL.Api.Common.Errors;
 using RPSSL.Api.Common.Errors.ErrorFactory;
 using RPSSL.Api.Configuration;
 
-namespace RPSSL.Api.Extensions;
+namespace RPSSL.Api.Common.Extensions;
 
 public static class ServiceCollectionExtensions
 {

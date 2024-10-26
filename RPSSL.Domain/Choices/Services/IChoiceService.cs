@@ -1,6 +1,9 @@
-﻿namespace RPSSL.Domain.Choices.Services;
+﻿using CSharpFunctionalExtensions;
+using RPSSL.Domain.Common.Lists;
+
+namespace RPSSL.Domain.Choices.Services;
 
 public interface IChoiceService
 {
-    public Choice GetByRandomNumber(PositiveNumber choiceNumber);
+    public Result<Choice, ErrorList> GetByRandomNumber(PositiveNumber choiceNumber);
 }

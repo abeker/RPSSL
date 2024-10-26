@@ -3,11 +3,12 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using Refit;
 using RPSSL.Application.Choices.Persistence;
+using RPSSL.Domain.Players.Persistence;
 using RPSSL.Infrastructure.ApiClients.CodeChallenge;
 using RPSSL.Infrastructure.Configuration;
 using RPSSL.Infrastructure.Persistence;
 
-namespace RPSSL.Infrastructure.Extensions;
+namespace RPSSL.Infrastructure.Common.Extensions;
 
 public static class ServiceCollectionExtensions
 {
@@ -28,7 +29,8 @@ public static class ServiceCollectionExtensions
             });
         
         services
-            .AddScoped<IRandomNumberRepository, RandomNumberRepository>();
+            .AddScoped<IRandomNumberRepository, RandomNumberRepository>()
+            .AddScoped<IPlayerRepository, PlayerRepository>();
 
         return services;
     }

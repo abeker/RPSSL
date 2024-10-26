@@ -2,7 +2,7 @@ using DomainError = RPSSL.Domain.Common.Errors.Abstractions;
 
 namespace RPSSL.Api.Common.Errors;
 
-public abstract class StatusError(DomainError.IError error, ErrorSource? source = null) : IError
+public abstract class StatusError(DomainError.IError error, ErrorSource source = null) : IError
 {
     public abstract int Status { get; }
 

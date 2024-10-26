@@ -1,5 +1,4 @@
 ﻿using CSharpFunctionalExtensions;
-using RPSSL.Domain.Choices;
 using RPSSL.Domain.Common.Lists;
 using RPSSL.Domain.Common.Models;
 using RPSSL.Domain.Players;
@@ -11,7 +10,7 @@ public class Game : Entity
 {
     public PlayerChoice PlayerChoice { get; }
     public PlayerChoice ComputerChoice { get; }
-    public GameResult Result { get; private set; }
+    public GameResult GameResult { get; private set; }
     
     private Game(EntityId id, PlayerChoice playerChoice, PlayerChoice computerChoice) : base(id)
     {
@@ -23,10 +22,11 @@ public class Game : Entity
     {
         return new Game(id, choice, computerChoice);
     }
-
-    public void PlayRound(Choice choice, Choice computerChoice)
+    
+    public Result<Game, ErrorList> PlayRound()
     {
         // TODO: Logic to determine the winner
-        Result = GameResult.Win;
+        GameResult = GameResult.Tie;
+        return this;
     }
 }
