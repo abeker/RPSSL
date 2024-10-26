@@ -10,6 +10,7 @@ public class RandomNumberRepository(ICodeChallengeApiClient codeChallengeApiClie
     public async Task<Result<int, ErrorList>> GenerateAsync(CancellationToken cancellationToken)
     {
         // todo: add retry policy and error handling
+        
         var response = await codeChallengeApiClient.GetRandomNumberAsync();
 
         return response.RandomNumber;
