@@ -41,5 +41,5 @@ jobs:
           docker pull ${{ env.IMAGE_NAME }}
           docker run -d \
             -e CODECHALLENGEAPI__BASEADDRESS=${{ vars.CODE_CHALLENGE_API_BASE_ADDRESS }} \
-            --rpssl \
+            --name rpssl \
             ${{ env.IMAGE_NAME }}
