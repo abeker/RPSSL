@@ -33,7 +33,7 @@ public class PlayGameCommandHandler(IPlayerRepository playerRepository, IChoiceS
 
         return playerChoiceResult.CombineToTuple(computerChoiceResult)
             .Bind(tuple => Game.Create(EntityId.Create(), tuple.Item1, tuple.Item2))
-            .Bind(game => game.PlayRound())
+            .Bind(game => game.PlayRound(choiceService))
             .Map(game => new PlayGameResponse(game.GameResult.ToString(), (int)game.PlayerChoice.Choice,
                 (int)game.ComputerChoice.Choice));
     }

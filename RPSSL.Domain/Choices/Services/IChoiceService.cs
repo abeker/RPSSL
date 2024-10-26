@@ -5,5 +5,6 @@ namespace RPSSL.Domain.Choices.Services;
 
 public interface IChoiceService
 {
-    public Result<Choice, ErrorList> GetByRandomNumber(PositiveNumber choiceNumber);
+    Result<Choice, ErrorList> GetByRandomNumber(PositiveNumber choiceNumber);
+    Maybe<Choice> CalculateWinner(Choice choice1, Choice choice2);
 }

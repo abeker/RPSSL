@@ -1,4 +1,5 @@
 ﻿using CSharpFunctionalExtensions;
+using RPSSL.Domain.Choices.Services;
 using RPSSL.Domain.Common.Lists;
 using RPSSL.Domain.Common.Models;
 using RPSSL.Domain.Players;
@@ -23,10 +24,15 @@ public class Game : Entity
         return new Game(id, choice, computerChoice);
     }
     
-    public Result<Game, ErrorList> PlayRound()
+    public Result<Game, ErrorList> PlayRound(IChoiceService choiceService)
     {
-        // TODO: Logic to determine the winner
-        GameResult = GameResult.Tie;
+        var winner = choiceService.CalculateWinner(PlayerChoice.Choice, ComputerChoice.Choice);
+        GameResult = winner.HasNoValue
+            ? GameResult.Tie
+            : winner.Value == PlayerChoice.Choice 
+                ? GameResult.Win 
+                : GameResult.Lose;
+        
         return this;
     }
 }
