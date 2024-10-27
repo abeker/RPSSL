@@ -31,6 +31,26 @@ jobs:
         tags: ${{ vars.IMAGE_NAME }}
         file: ${{ env.DOCKER_FILE_PATH }}
 
+    - name: Ensure Docker is installed on the server
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.HETZNER_HOST }}
+        username: ${{ secrets.HETZNER_USERNAME }}
+        key: ${{ secrets.HETZNER_SSH_KEY }}
+        script: |
+          if ! command -v docker &> /dev/null; then
+              echo "Docker could not be found, installing now..."
+              sudo apt-get update
+              sudo apt-get install -y apt-transport-https ca-certificates curl software-properties-common
+              curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+              sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+              sudo apt-get update
+              sudo apt-get install -y docker-ce
+              echo "Docker installed successfully."
+          else
+              echo "Docker is already installed."
+          fi
+          
     - name: Deploy to Server
       uses: appleboy/ssh-action@master
       with:
