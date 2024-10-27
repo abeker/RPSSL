@@ -10,11 +10,10 @@ using RPSSL.Domain.Common.Models;
 using RPSSL.Domain.Games;
 using RPSSL.Domain.Players;
 using RPSSL.Domain.Players.Persistence;
-using Serilog;
 
 namespace RPSSL.Application.Games.PlayGameCommand;
 
-public class PlayGameCommandHandler(IPlayerRepository playerRepository, IChoiceService choiceService, IRandomNumberRepository randomNumberRepository, ILogger logger) 
+public class PlayGameCommandHandler(IPlayerRepository playerRepository, IChoiceService choiceService, IRandomNumberRepository randomNumberRepository) 
     : ICommandHandler<PlayGameCommand, Result<PlayGameResponse, ErrorList>>
 {
     public async Task<Result<PlayGameResponse, ErrorList>> Handle(PlayGameCommand request, CancellationToken cancellationToken)

@@ -4,11 +4,10 @@ using RPSSL.Application.Choices.Persistence;
 using RPSSL.Domain.Choices;
 using RPSSL.Domain.Choices.Services;
 using RPSSL.Domain.Common.Lists;
-using Serilog;
 
 namespace RPSSL.Application.Choices.GetRandomChoice;
 
-public class GetRandomChoiceQueryHandler(IRandomNumberRepository randomNumberRepository, IChoiceService choiceService, ILogger logger) 
+public class GetRandomChoiceQueryHandler(IRandomNumberRepository randomNumberRepository, IChoiceService choiceService) 
     : IRequestHandler<GetRandomChoiceQuery, Result<RandomChoiceResponse, ErrorList>>
 {
     public async Task<Result<RandomChoiceResponse, ErrorList>> Handle(GetRandomChoiceQuery request, CancellationToken cancellationToken)
