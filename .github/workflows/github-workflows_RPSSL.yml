@@ -60,6 +60,7 @@ jobs:
         script: |
           docker pull ${{ vars.IMAGE_NAME }}
           docker run -d \
+            -p 8080:8080 \
             -e CODECHALLENGEAPI__BASEADDRESS=${{ vars.CODE_CHALLENGE_API_BASE_ADDRESS }} \
             --name rpssl \
             ${{ vars.IMAGE_NAME }}
