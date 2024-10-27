@@ -51,7 +51,11 @@ jobs:
         username: ${{ secrets.HETZNER_USERNAME }}
         key: ${{ secrets.HETZNER_SSH_KEY }}
         script: |
-          rm -rf /home/abeker/rpssl/*
+          if [ -d "/home/abeker/rpssl" ]; then
+            echo "Clearing existing project directory..."
+            rm -rf /home/abeker/rpssl  # Remove the entire directory
+          fi
+          echo "Cloning the repository..."
           git clone https://github.com/abeker/RPSSL.git /home/abeker/rpssl
 
     - name: Pull Latest Code and Deploy
