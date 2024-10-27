@@ -1,0 +1,12 @@
+html, body, #root {
+  height: 100%; /* Osigurajte da visina bude 100% */
+  margin: 0; /* Uklonite marginu */
+}
+
+#root {
+  display: flex; /* Koristite flexbox */
+  align-items: center; /* Vertikalno centriranje */
+  max-width: 1280px;
+  margin: 0 auto;
+  text-align: center;
+}
