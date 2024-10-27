@@ -50,7 +50,7 @@ jobs:
           else
               echo "Docker is already installed."
           fi
-          
+
     - name: Deploy to Server
       uses: appleboy/ssh-action@master
       with:
@@ -58,8 +58,8 @@ jobs:
         username: ${{ secrets.HETZNER_USERNAME }}
         key: ${{ secrets.HETZNER_SSH_KEY }}
         script: |
-          docker pull ${{ env.IMAGE_NAME }}
+          docker pull ${{ vars.IMAGE_NAME }}
           docker run -d \
             -e CODECHALLENGEAPI__BASEADDRESS=${{ vars.CODE_CHALLENGE_API_BASE_ADDRESS }} \
             --name rpssl \
-            ${{ env.IMAGE_NAME }}
+            ${{ vars.IMAGE_NAME }}
