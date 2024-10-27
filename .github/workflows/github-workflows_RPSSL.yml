@@ -90,5 +90,6 @@ jobs:
         key: ${{ secrets.HETZNER_SSH_KEY }}
         script: |
           cd /home/abeker/rpssl
+          export CODECHALLENGEAPI__BASEADDRESS=${{ vars.CODE_CHALLENGEAPI__BASEADDRESS }}
           docker-compose pull
           docker-compose up -d 
