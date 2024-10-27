@@ -52,7 +52,7 @@ jobs:
         key: ${{ secrets.HETZNER_SSH_KEY }}
         script: |
           rm -rf /home/abeker/rpssl/*
-          git clone https://github.com/abeker/RPSSL.git /home/abeker/rpssl /home/abeker/rpssl
+          git clone https://github.com/abeker/RPSSL.git /home/abeker/rpssl
 
     - name: Pull Latest Code and Deploy
       uses: appleboy/ssh-action@master
