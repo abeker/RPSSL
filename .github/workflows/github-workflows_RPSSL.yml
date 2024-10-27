@@ -44,28 +44,15 @@ jobs:
               echo "Docker Compose is already installed."
           fi
 
-    - name: Ensure Project Directory Exists
+    - name: Clear Project Directory and Clone Repository
       uses: appleboy/ssh-action@master
       with:
         host: ${{ secrets.HETZNER_HOST }}
         username: ${{ secrets.HETZNER_USERNAME }}
         key: ${{ secrets.HETZNER_SSH_KEY }}
         script: |
-          mkdir -p /home/abeker/rpssl
-
-    - name: Clone or Update Repository
-      uses: appleboy/ssh-action@master
-      with:
-        host: ${{ secrets.HETZNER_HOST }}
-        username: ${{ secrets.HETZNER_USERNAME }}
-        key: ${{ secrets.HETZNER_SSH_KEY }}
-        script: |
-          if [ ! -d "/home/abeker/rpssl/.git" ]; then
-            git clone https://github.com/yourusername/yourrepository.git /home/abeker/rpssl
-          else
-            cd /home/abeker/rpssl
-            git pull origin master  # Pull the latest code if the repo already exists
-          fi
+          rm -rf /home/abeker/rpssl/*
+          git clone https://github.com/yourusername/yourrepository.git /home/abeker/rpssl
 
     - name: Pull Latest Code and Deploy
       uses: appleboy/ssh-action@master
@@ -75,7 +62,6 @@ jobs:
         key: ${{ secrets.HETZNER_SSH_KEY }}
         script: |
           cd /home/abeker/rpssl
-          git pull origin master
           export CODECHALLENGEAPI__BASEADDRESS=${{ vars.CODE_CHALLENGEAPI__BASEADDRESS }}
           docker-compose pull
           docker-compose up -d
