@@ -53,7 +53,7 @@ jobs:
         script: |
           if [ -d "/home/abeker/rpssl" ]; then
             echo "Clearing existing project directory..."
-            rm -rf /home/abeker/rpssl  # Remove the entire directory
+            rm -rf /home/abeker/rpssl
           fi
           echo "Cloning the repository..."
           git clone https://github.com/abeker/RPSSL.git /home/abeker/rpssl
@@ -66,7 +66,7 @@ jobs:
         key: ${{ secrets.HETZNER_SSH_KEY }}
         script: |
           cd /home/abeker/rpssl
-          export CODECHALLENGEAPI__BASEADDRESS=${{ vars.CODE_CHALLENGEAPI__BASEADDRESS }}
+          export CODECHALLENGEAPI__BASEADDRESS=${{ vars.CODE_CHALLENGE_API_BASE_ADDRESS }}
           docker-compose down --volumes --remove-orphans
           docker-compose pull
           docker-compose up -d
