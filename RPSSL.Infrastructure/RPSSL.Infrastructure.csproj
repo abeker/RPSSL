@@ -11,13 +11,10 @@
     </ItemGroup>
 
     <ItemGroup>
+      <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="8.0.10" />
       <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="8.0.0" />
       <PackageReference Include="Refit" Version="7.2.1" />
       <PackageReference Include="Refit.HttpClientFactory" Version="7.2.1" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <Folder Include="Common\" />
     </ItemGroup>
 
 </Project>

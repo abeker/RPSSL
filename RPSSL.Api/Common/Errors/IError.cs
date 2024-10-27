@@ -4,14 +4,14 @@ namespace RPSSL.Api.Common.Errors;
 
 public interface IError {
     [Required]
-    public int Status { get; }
+    int Status { get; }
     
     [Required]
-    public string Code { get; }
+    string Code { get; }
     
     [Required]
-    public string Title { get; }
+    string Title { get; }
     
     [Required]
-    public ErrorSource Source { get; }
+    ErrorSource Source { get; }
 }

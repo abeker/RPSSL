@@ -1,3 +1,4 @@
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
@@ -7,17 +8,22 @@ using RPSSL.Domain.Players.Persistence;
 using RPSSL.Infrastructure.ApiClients.CodeChallenge;
 using RPSSL.Infrastructure.Configuration;
 using RPSSL.Infrastructure.Persistence;
+using RPSSL.Infrastructure.Persistence.Configuration;
 
 namespace RPSSL.Infrastructure.Common.Extensions;
 
 public static class ServiceCollectionExtensions
 {
+    private const string DbName = "RpsslDb";
+    
     public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
     {
         services.AddSingleton<IValidateOptions<CodeChallengeApiOptions>, CodeChallengeApiOptions>();
         services.AddOptions<CodeChallengeApiOptions>()
             .Bind(configuration.GetSection(CodeChallengeApiOptions.CodeChallengeApi))
             .ValidateOnStart();
+        
+        services.AddDbContext<InMemoryDbContext>(options => options.UseInMemoryDatabase(DbName));
 
         services
             .AddRefitClient<ICodeChallengeApiClient>()

@@ -1,4 +1,6 @@
-﻿namespace RPSSL.Api.Common.Extensions;
+﻿using RPSSL.Infrastructure.Persistence.Configuration;
+
+namespace RPSSL.Api.Common.Extensions;
 
 public static class WebApplicationExtensions
 {
@@ -19,5 +21,14 @@ public static class WebApplicationExtensions
         app.UseRouting();
         
         app.MapControllers();
+
+        SeedDatabase(app);
+    }
+    
+    private static void SeedDatabase(IHost app)
+    {
+        using var scope = app.Services.CreateScope();
+        var context = scope.ServiceProvider.GetRequiredService<InMemoryDbContext>();
+        context.Seed();
     }
 }

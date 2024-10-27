@@ -7,4 +7,5 @@ internal static class ErrorCodes
     internal const string EmptyGuidErrorCode = "003";
     internal const string EnumOutOfRangeErrorCode = "004";
     internal const string NullValueErrorCode = "005";
+    internal const string EntityNotFoundErrorCode = "006";
 }

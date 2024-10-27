@@ -7,7 +7,7 @@ namespace RPSSL.Domain.Players;
 
 public class Player : Entity
 {
-    public static readonly Player Computer = new(EntityId.Create(Guid.Parse("3F39C3E7-C8CE-40E5-841F-D606273D37A2")).Value, PlayerName.Create("Computer").Value);
+    public static readonly Player Computer = new(EntityId.Create(), PlayerName.Create("Computer").Value);
     
     public PlayerName Name { get; }
 
