@@ -6,8 +6,8 @@ interface UserChoiceProps {
 }
 
 const UserChoice = ({ userChoice }: UserChoiceProps) => (
-    <Box style={{ flex: 1, textAlign: 'center' }}>
-        <Typography variant="h6">Your Choice:</Typography>
+    <Box style={{ flex: 1, textAlign: 'center', color: 'dodgerBlue'}}>
+        <Typography variant="h4">Your choice</Typography>
         <Typography variant="h5">{userChoice ? userChoice.name : 'None'}</Typography>
     </Box>
 );

@@ -7,12 +7,12 @@ interface ComputerChoiceProps {
 }
 
 const ComputerChoice = ({ computerChoice, loading }: ComputerChoiceProps) => (
-    <Box style={{ flex: 1, textAlign: 'center' }}>
-        <Typography variant="h6">Computer Choice:</Typography>
+    <Box style={{ flex: 1, textAlign: 'center', color: 'dodgerBlue' }}>
+        <Typography variant="h4">Computer choice</Typography>
         {loading ? (
             <CircularProgress />
         ) : (
-            <Typography variant="h5">{computerChoice ? computerChoice.name : 'None'}</Typography>
+            <Typography variant="h5" >{computerChoice ? computerChoice.name : 'None'}</Typography>
         )}
     </Box>
 );

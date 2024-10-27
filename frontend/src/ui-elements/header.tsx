@@ -1,13 +1,16 @@
-import { AppBar, Toolbar, Typography } from '@mui/material';
+import { Toolbar, Typography } from "@mui/material";
+import { useTheme } from '@mui/material/styles';
 
-const Header = () => (
-    <AppBar position="static" style={{ backgroundColor: 'rgba(255, 255, 255, 0.8)', color: 'black' }}>
+const Header = () => {
+    const theme = useTheme();
+
+    return (
         <Toolbar>
-            <Typography variant="h6" style={{ flexGrow: 1 }}>
-                Rock, Paper, Scissors, Lizard, Spock
+            <Typography variant="h3" style={{ flexGrow: 1, color: theme.palette.primary.main }}>
+                Rock Paper Scissors Lizard Spock
             </Typography>
         </Toolbar>
-    </AppBar>
-);
+    );
+};
 
 export default Header;
