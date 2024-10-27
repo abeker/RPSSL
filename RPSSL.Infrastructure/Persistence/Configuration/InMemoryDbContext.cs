@@ -12,10 +12,15 @@ public class InMemoryDbContext(DbContextOptions<InMemoryDbContext> options) : Db
     {
         if (!Players.Any())
         {
-            Players.Add(new Player
+            Players.AddRange(new Player
             {
                 Id = Domain.Players.Player.Computer.Id.Value,
                 Name = Domain.Players.Player.Computer.Name.Value
+            },
+            new Player
+            {
+                Id = Domain.Players.Player.Anonymous.Id.Value,
+                Name = Domain.Players.Player.Anonymous.Name.Value
             });
             SaveChanges();
         }

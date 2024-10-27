@@ -5,6 +5,6 @@ namespace RPSSL.Api.Factories.Games;
 
 public static class PlayGameCommandFactory
 {
-    public static PlayGameCommand Create(PlayGameRequest request) => new("random", request.Player);
+    public static PlayGameCommand Create(PlayGameRequest request) => new(string.Empty, request.Player);
 
 }

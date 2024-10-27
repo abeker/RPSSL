@@ -19,7 +19,7 @@ public class PlayGameCommandHandler(IPlayerRepository playerRepository, IChoiceS
 {
     public async Task<Result<PlayGameResponse, ErrorList>> Handle(PlayGameCommand request, CancellationToken cancellationToken)
     {
-        var playerName = PlayerName.Create(request.Name);
+        var playerName = PlayerName.Create(string.IsNullOrWhiteSpace(request.Name) ? Player.Anonymous.Name.Value : request.Name);
         var playerChoice = request.Choice.TryConvertToEnum<Choice>();
 
         var playerChoiceResult = await playerName.CombineToTuple(playerChoice)
