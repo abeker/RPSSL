@@ -18,14 +18,16 @@ jobs:
     - name: Set up Docker Buildx
       uses: docker/setup-buildx-action@v1
 
-    - name: Install Docker Compose
-      run: |
-        sudo apt-get update
-        sudo apt-get install -y docker-compose
+    - name: Login to Docker Hub
+      uses: docker/login-action@v1
+      with:
+        username: ${{ secrets.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
 
-    - name: Build Docker images
+    - name: Build and Push Docker Images
       run: |
         docker-compose -f docker-compose.yml build
+        docker-compose -f docker-compose.yml push
   
     - name: Ensure Docker is installed on the server
       uses: appleboy/ssh-action@master
@@ -45,6 +47,15 @@ jobs:
               echo "Docker installed successfully."
           else
               echo "Docker is already installed."
+          fi
+
+          if ! command -v docker-compose &> /dev/null; then
+              echo "Docker Compose could not be found, installing now..."
+              sudo curl -L "https://github.com/docker/compose/releases/latest/download/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+              sudo chmod +x /usr/local/bin/docker-compose
+              echo "Docker Compose installed successfully."
+          else
+              echo "Docker Compose is already installed."
           fi
 
     - name: Deploy to Server
