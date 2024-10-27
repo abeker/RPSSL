@@ -1,0 +1,26 @@
+﻿version: '3.8'
+
+services:
+  rpssl.api:
+    container_name: rpssl-api
+    image: rpssl.api:latest
+    build:
+      context: .
+      dockerfile: RPSSL.Api/Dockerfile
+    ports:
+      - "8080:80"
+    environment:
+      - CODECHALLENGEAPI__BASEADDRESS=${CODECHALLENGEAPI__BASEADDRESS}
+
+  rpssl.frontend:
+    container_name: rpssl-frontend
+    image: rpssl.frontend:latest
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - "80:80"
+    depends_on:
+      - rpssl.api
+    environment:
+      - RPSSL_API_BASE_URL=http://rpssl.api:8080

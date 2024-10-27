@@ -9,6 +9,6 @@ export const createAxiosInstance = (baseURL: string) => {
     });
 };
 
-const API_BASE_URL = 'https://codechallenge.boohma.com';
+const API_BASE_URL = import.meta.env.RPSSL_API_BASE_URL;
 
 export const baseAxios = createAxiosInstance(API_BASE_URL);

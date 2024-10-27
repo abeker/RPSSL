@@ -9,7 +9,7 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     env:
-      DOCKER_FILE_PATH: RPSSL.Api/Dockerfile
+      CODECHALLENGEAPI__BASEADDRESS: ${{ vars.CODE_CHALLENGE_API_BASE_ADDRESS }}
 
     steps:
     - name: Checkout Code
@@ -18,19 +18,10 @@ jobs:
     - name: Set up Docker Buildx
       uses: docker/setup-buildx-action@v1
 
-    - name: Login to Docker Hub
-      uses: docker/login-action@v1
-      with:
-        username: ${{ secrets.DOCKER_USERNAME }}
-        password: ${{ secrets.DOCKER_PASSWORD }}
-
-    - name: Build and push Docker image
-      uses: docker/build-push-action@v2
-      with:
-        push: true
-        tags: ${{ vars.IMAGE_NAME }}
-        file: ${{ env.DOCKER_FILE_PATH }}
-
+    - name: Build Docker images
+      run: |
+        docker-compose -f docker-compose.yml build
+  
     - name: Ensure Docker is installed on the server
       uses: appleboy/ssh-action@master
       with:
@@ -58,11 +49,5 @@ jobs:
         username: ${{ secrets.HETZNER_USERNAME }}
         key: ${{ secrets.HETZNER_SSH_KEY }}
         script: |
-          docker pull ${{ vars.IMAGE_NAME }}
-          docker stop rpssl || true
-          docker rm rpssl || true
-          docker run -d \
-            -p 8080:8080 \
-            -e CODECHALLENGEAPI__BASEADDRESS=${{ vars.CODE_CHALLENGE_API_BASE_ADDRESS }} \
-            --name rpssl \
-            ${{ vars.IMAGE_NAME }}
+          docker-compose pull
+          docker-compose up -d 
