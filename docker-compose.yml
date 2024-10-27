@@ -9,7 +9,7 @@ services:
     ports:
       - "8080:8080"
     environment:
-      - CODECHALLENGEAPI__BASEADDRESS=${CODECHALLENGEAPI__BASEADDRESS}
+      - CODECHALLENGEAPI__BASEADDRESS=https://codechallenge.boohma.com
 
   rpssl.frontend:
     container_name: rpssl-frontend
