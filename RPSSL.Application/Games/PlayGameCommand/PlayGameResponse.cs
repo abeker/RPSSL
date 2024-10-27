@@ -1,3 +1,3 @@
 ﻿namespace RPSSL.Application.Games.PlayGameCommand;
 
-public record PlayGameResponse(string results, int player, int computer);
+public record PlayGameResponse(string Results, int Player, int Computer);

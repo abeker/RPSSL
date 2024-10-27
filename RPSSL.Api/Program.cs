@@ -1,6 +1,7 @@
 ﻿using System.Text;
 using dotenv.net;
 using RPSSL.Api.Common.Extensions;
+using Serilog;
 
 DotEnv.Fluent()
     .WithoutExceptions()
@@ -9,7 +10,14 @@ DotEnv.Fluent()
     .WithoutOverwriteExistingVars()
     .Load();
 
+Log.Logger = new LoggerConfiguration()
+    .MinimumLevel.Information()
+    .WriteTo.Console()
+    .CreateLogger();
+
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Host.UseSerilog();
 
 builder.ConfigureServices();
 
