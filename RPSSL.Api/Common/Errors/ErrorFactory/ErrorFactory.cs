@@ -25,6 +25,7 @@ public class ErrorFactory(ILogger<ErrorFactory> logger) : IErrorFactory
             EmptyGuidError err => new Status400Error(err),
             EmptyStringError err => new Status400Error(err),
             EntityNotFoundError err => new Status404Error(err),
+            EntityAlreadyExistsError err => new Status400Error(err),
             EnumOutOfRangeError err => new Status400Error(err),
             NullValueError err => new Status400Error(err),
             PositiveNumberOutOfRangeError err => new Status400Error(err),

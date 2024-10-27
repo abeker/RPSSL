@@ -8,4 +8,5 @@ internal static class ErrorCodes
     internal const string EnumOutOfRangeErrorCode = "004";
     internal const string NullValueErrorCode = "005";
     internal const string EntityNotFoundErrorCode = "006";
+    internal const string EntityAlreadyExistErrorCode = "007";
 }

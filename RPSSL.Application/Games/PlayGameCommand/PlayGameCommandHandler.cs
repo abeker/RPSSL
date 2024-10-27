@@ -5,6 +5,8 @@ using RPSSL.Application.Common.Commands;
 using RPSSL.Application.Common.Extensions;
 using RPSSL.Domain.Choices;
 using RPSSL.Domain.Choices.Services;
+using RPSSL.Domain.Common.Errors;
+using RPSSL.Domain.Common.Errors.Extensions;
 using RPSSL.Domain.Common.Extensions;
 using RPSSL.Domain.Common.Lists;
 using RPSSL.Domain.Common.Models;
@@ -25,8 +27,9 @@ public class PlayGameCommandHandler(IPlayerRepository playerRepository, IChoiceS
         var playerChoice = request.Choice.TryConvertToEnum<Choice>();
 
         var playerChoiceResult = await playerName.CombineToTuple(playerChoice)
-            .Bind(async tuple => await playerRepository.GetByName(tuple.Item1)
-                .Bind(playerResult => PlayerChoice.Create(playerResult, tuple.Item2)));
+            .Bind(async tuple => await playerRepository.GetByNameAsync(tuple.Item1)
+                .Ensure(p => p.HasValue, _ => new EntityNotFoundError(nameof(Player)).ToList())
+                .Bind(playerResult => PlayerChoice.Create(playerResult.Value, tuple.Item2)));
 
         var computerChoiceResult = await randomNumberRepository.GenerateAsync(cancellationToken)
             .Bind(PositiveNumber.Create)

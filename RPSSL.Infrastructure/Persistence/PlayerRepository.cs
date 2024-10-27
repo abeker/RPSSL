@@ -1,7 +1,5 @@
 ﻿using CSharpFunctionalExtensions;
 using Microsoft.EntityFrameworkCore;
-using RPSSL.Domain.Common.Errors;
-using RPSSL.Domain.Common.Errors.Extensions;
 using RPSSL.Domain.Common.Lists;
 using RPSSL.Domain.Common.Models;
 using RPSSL.Domain.Players;
@@ -12,14 +10,27 @@ namespace RPSSL.Infrastructure.Persistence;
 
 public class PlayerRepository(InMemoryDbContext context) : IPlayerRepository
 {
-    public async Task<Result<Player, ErrorList>> GetByName(PlayerName name)
+    public async Task<UnitResult<ErrorList>> CreateAsync(Player player)
+    {
+        await context.Players.AddAsync(new Entities.Player
+        {
+            Id = player.Id.Value,
+            Name = player.Name.Value
+        });
+
+        await context.SaveChangesAsync();
+
+        return UnitResult.Success<ErrorList>();
+    }
+
+    public async Task<Result<Maybe<Player>, ErrorList>> GetByNameAsync(PlayerName name)
     {
         var player = await context.Players
             .FirstOrDefaultAsync(p => p.Name == name.Value);
         
         if (player is null)
-            return Result.Failure<Player, ErrorList>(new EntityNotFoundError(nameof(Entities.Player)).ToList());
+            return Result.Success<Maybe<Player>, ErrorList>(Maybe.None);
 
-        return Player.Create(EntityId.Create(player.Id).Value, PlayerName.Create(player.Name).Value);
+        return Result.Success<Maybe<Player>, ErrorList>(Player.Create(EntityId.Create(player.Id).Value, PlayerName.Create(player.Name).Value).Value);
     }
 }

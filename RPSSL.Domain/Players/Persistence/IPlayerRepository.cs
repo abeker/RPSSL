@@ -5,5 +5,6 @@ namespace RPSSL.Domain.Players.Persistence;
 
 public interface IPlayerRepository
 {
-    Task<Result<Player, ErrorList>> GetByName(PlayerName name);
+    Task<UnitResult<ErrorList>> CreateAsync(Player player);
+    Task<Result<Maybe<Player>, ErrorList>> GetByNameAsync(PlayerName name);
 }
