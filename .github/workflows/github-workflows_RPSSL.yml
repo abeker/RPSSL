@@ -15,25 +15,6 @@ jobs:
     - name: Checkout Code
       uses: actions/checkout@v2
 
-    - name: Set up Docker Buildx
-      uses: docker/setup-buildx-action@v1
-
-    - name: Install Docker Compose
-      run: |
-        sudo apt-get update
-        sudo apt-get install -y docker-compose
-
-    - name: Login to Docker Hub
-      uses: docker/login-action@v1
-      with:
-        username: ${{ secrets.DOCKER_USERNAME }}
-        password: ${{ secrets.DOCKER_PASSWORD }}
-
-    - name: Build and Push Docker Images
-      run: |
-        docker-compose -f docker-compose.yml build
-        docker-compose -f docker-compose.yml push
-  
     - name: Ensure Docker is installed on the server
       uses: appleboy/ssh-action@master
       with:
@@ -72,17 +53,18 @@ jobs:
         script: |
           mkdir -p /home/abeker/rpssl
 
-    - name: Copy Project Files to Server
-      uses: appleboy/scp-action@master
+    - name: Clone Repository if Not Exists
+      uses: appleboy/ssh-action@master
       with:
         host: ${{ secrets.HETZNER_HOST }}
         username: ${{ secrets.HETZNER_USERNAME }}
         key: ${{ secrets.HETZNER_SSH_KEY }}
-        port: 22
-        source: "docker-compose.yml, RPSSL.Api/**, frontend/**"
-        target: "/home/abeker/rpssl"
+        script: |
+          if [ ! -d "/home/abeker/rpssl/.git" ]; then
+            git clone https://github.com/abeker/RPSSL.git /home/abeker/rpssl
+          fi
 
-    - name: Deploy to Server
+    - name: Pull Latest Code and Deploy
       uses: appleboy/ssh-action@master
       with:
         host: ${{ secrets.HETZNER_HOST }}
@@ -90,6 +72,7 @@ jobs:
         key: ${{ secrets.HETZNER_SSH_KEY }}
         script: |
           cd /home/abeker/rpssl
+          git pull origin master
           export CODECHALLENGEAPI__BASEADDRESS=${{ vars.CODE_CHALLENGEAPI__BASEADDRESS }}
           docker-compose pull
-          docker-compose up -d 
+          docker-compose up -d
