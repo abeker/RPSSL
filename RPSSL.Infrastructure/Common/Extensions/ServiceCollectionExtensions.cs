@@ -4,11 +4,13 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using Refit;
 using RPSSL.Application.Choices.Persistence;
+using RPSSL.Domain.Games.Persistence;
 using RPSSL.Domain.Players.Persistence;
 using RPSSL.Infrastructure.ApiClients.CodeChallenge;
 using RPSSL.Infrastructure.Configuration;
 using RPSSL.Infrastructure.Persistence;
 using RPSSL.Infrastructure.Persistence.Configuration;
+using RPSSL.Infrastructure.Persistence.Factories;
 
 namespace RPSSL.Infrastructure.Common.Extensions;
 
@@ -36,7 +38,9 @@ public static class ServiceCollectionExtensions
         
         services
             .AddScoped<IRandomNumberRepository, RandomNumberRepository>()
-            .AddScoped<IPlayerRepository, PlayerRepository>();
+            .AddScoped<IPlayerRepository, PlayerRepository>()
+            .AddScoped<IGameRepository, GameRepository>()
+            .AddScoped<PlayerFactory>();
 
         return services;
     }

@@ -5,18 +5,15 @@ using RPSSL.Domain.Common.Models;
 using RPSSL.Domain.Players;
 using RPSSL.Domain.Players.Persistence;
 using RPSSL.Infrastructure.Persistence.Configuration;
+using RPSSL.Infrastructure.Persistence.Factories;
 
 namespace RPSSL.Infrastructure.Persistence;
 
-public class PlayerRepository(InMemoryDbContext context) : IPlayerRepository
+public class PlayerRepository(InMemoryDbContext context, PlayerFactory playerFactory) : IPlayerRepository
 {
     public async Task<UnitResult<ErrorList>> CreateAsync(Player player)
     {
-        await context.Players.AddAsync(new Entities.Player
-        {
-            Id = player.Id.Value,
-            Name = player.Name.Value
-        });
+        await context.Players.AddAsync(playerFactory.Create(player));
 
         await context.SaveChangesAsync();
 

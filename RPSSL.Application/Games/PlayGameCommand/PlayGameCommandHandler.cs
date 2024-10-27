@@ -11,12 +11,18 @@ using RPSSL.Domain.Common.Extensions;
 using RPSSL.Domain.Common.Lists;
 using RPSSL.Domain.Common.Models;
 using RPSSL.Domain.Games;
+using RPSSL.Domain.Games.Persistence;
 using RPSSL.Domain.Players;
 using RPSSL.Domain.Players.Persistence;
 
 namespace RPSSL.Application.Games.PlayGameCommand;
 
-public class PlayGameCommandHandler(IPlayerRepository playerRepository, IChoiceService choiceService, IRandomNumberRepository randomNumberRepository, ILogger<PlayGameCommandHandler> logger) 
+public class PlayGameCommandHandler(
+    IPlayerRepository playerRepository, 
+    IChoiceService choiceService, 
+    IRandomNumberRepository randomNumberRepository,
+    IGameRepository gameRepository,
+    ILogger<PlayGameCommandHandler> logger) 
     : ICommandHandler<PlayGameCommand, Result<PlayGameResponse, ErrorList>>
 {
     public async Task<Result<PlayGameResponse, ErrorList>> Handle(PlayGameCommand request, CancellationToken cancellationToken)
@@ -35,10 +41,11 @@ public class PlayGameCommandHandler(IPlayerRepository playerRepository, IChoiceS
             .Bind(PositiveNumber.Create)
             .Bind(choiceService.GetByRandomNumber)
             .Bind(randomChoice => PlayerChoice.Create(Player.Computer, randomChoice));
-
-        return playerChoiceResult.CombineToTuple(computerChoiceResult)
+        
+        return await playerChoiceResult.CombineToTuple(computerChoiceResult)
             .Bind(tuple => Game.Create(EntityId.Create(), tuple.Item1, tuple.Item2))
             .Bind(game => game.PlayRound(choiceService))
+            .Tap(async game => await gameRepository.CreateAsync(game))
             .Map(game => new PlayGameResponse(game.GameResult.ToString().ToLowerInvariant(), (int)game.PlayerChoice.Choice,
                 (int)game.ComputerChoice.Choice))
             .Tap(result => logger.LogInformation("Player '{PlayerName}' {GameResult}", request.Name, result.Results))

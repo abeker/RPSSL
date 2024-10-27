@@ -11,8 +11,12 @@ using RPSSL.Application.Games.PlayGameCommand;
 
 namespace RPSSL.Api.Controllers;
 
+/// <summary>
+/// TestController is designed to facilitate testing of routes as required by the specifications.
+/// It operates without versioning and API prefix, allowing for straightforward route access during testing.
+/// </summary>
 [ApiController]
-public class GameController(ISender mediator, IErrorFactory errorFactory, IErrorResponseFactory errorResponseFactory) : ControllerBase
+public class TestController(ISender mediator, IErrorFactory errorFactory, IErrorResponseFactory errorResponseFactory) : ControllerBase
 {
     /// <summary>
     /// Returns all available choices
@@ -44,9 +48,9 @@ public class GameController(ISender mediator, IErrorFactory errorFactory, IError
     [HttpPost, Route("/play")]
     [ActionName(nameof(PlayAsync))]
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(PlayGameResponse))]
-    public async Task<ActionResult<PlayGameResponse>> PlayAsync([FromBody] PlayGameRequest request) =>
+    public async Task<ActionResult<PlayGameResponse>> PlayAsync([FromBody] PlayGameTestRequest testRequest) =>
         await mediator
-            .Send(PlayGameCommandFactory.Create(request))
+            .Send(PlayGameCommandFactory.Create(testRequest))
             .MapError(errorFactory.From)
             .Match(onSuccess: Ok, onFailure: errorResponseFactory.From);
 }

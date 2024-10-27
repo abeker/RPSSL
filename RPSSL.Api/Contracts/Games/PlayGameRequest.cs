@@ -1,3 +1,3 @@
 ﻿namespace RPSSL.Api.Contracts.Games;
 
-public record PlayGameRequest(int Player);
+public record PlayGameRequest(string Name, int Player);
