@@ -63,5 +63,6 @@ jobs:
         script: |
           cd /home/abeker/rpssl
           export CODECHALLENGEAPI__BASEADDRESS=${{ vars.CODE_CHALLENGEAPI__BASEADDRESS }}
+          docker-compose down --volumes --remove-orphans
           docker-compose pull
           docker-compose up -d
