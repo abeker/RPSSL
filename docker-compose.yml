@@ -3,7 +3,7 @@
 services:
   rpssl.api:
     container_name: rpssl-api
-    image: rpssl.api:latest
+    image: abeker/rpssl.api:latest
     build:
       context: .
       dockerfile: RPSSL.Api/Dockerfile
@@ -14,7 +14,7 @@ services:
 
   rpssl.frontend:
     container_name: rpssl-frontend
-    image: rpssl.frontend:latest
+    image: abeker/rpssl.frontend:latest
     build:
       context: ./frontend
       dockerfile: Dockerfile
