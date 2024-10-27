@@ -4,7 +4,7 @@ namespace RPSSL.Infrastructure.Persistence.Entities;
 
 public class Game
 {
-    public Guid Id { get; set; }
-    public Player Player { get; set; }
-    public GameResult Result { get; set; }
+    public Guid Id { get; init; }
+    public Player Player { get; init; }
+    public GameResult Result { get; init; }
 }

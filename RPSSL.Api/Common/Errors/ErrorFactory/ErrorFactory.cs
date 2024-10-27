@@ -22,9 +22,12 @@ public class ErrorFactory(ILogger<ErrorFactory> logger) : IErrorFactory
     {
         IError apiError = error switch
         {
-            EmptyGuidError emptyGuidError => new Status400Error(emptyGuidError),
-            EmptyStringError emptyStringError => new Status400Error(emptyStringError),
-            PositiveNumberOutOfRangeError invalidChoiceIdError => new Status400Error(invalidChoiceIdError),
+            EmptyGuidError err => new Status400Error(err),
+            EmptyStringError err => new Status400Error(err),
+            EntityNotFoundError err => new Status404Error(err),
+            EnumOutOfRangeError err => new Status400Error(err),
+            NullValueError err => new Status400Error(err),
+            PositiveNumberOutOfRangeError err => new Status400Error(err),
             _ => new Status500Error(error),
         };
 
