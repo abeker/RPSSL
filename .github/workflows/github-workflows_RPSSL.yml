@@ -63,6 +63,25 @@ jobs:
               echo "Docker Compose is already installed."
           fi
 
+    - name: Ensure Project Directory Exists
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.HETZNER_HOST }}
+        username: ${{ secrets.HETZNER_USERNAME }}
+        key: ${{ secrets.HETZNER_SSH_KEY }}
+        script: |
+          mkdir -p /home/abeker/rpssl
+
+    - name: Copy Project Files to Server
+      uses: appleboy/scp-action@master
+      with:
+        host: ${{ secrets.HETZNER_HOST }}
+        username: ${{ secrets.HETZNER_USERNAME }}
+        key: ${{ secrets.HETZNER_SSH_KEY }}
+        port: 22
+        source: "docker-compose.yml, RPSSL.Api/**, frontend/**"
+        target: "/home/abeker/rpssl"
+
     - name: Deploy to Server
       uses: appleboy/ssh-action@master
       with:
@@ -70,5 +89,6 @@ jobs:
         username: ${{ secrets.HETZNER_USERNAME }}
         key: ${{ secrets.HETZNER_SSH_KEY }}
         script: |
+          cd /home/abeker/rpssl
           docker-compose pull
           docker-compose up -d 
