@@ -3,18 +3,16 @@
 services:
   rpssl.api:
     container_name: rpssl-api
-    image: abeker/rpssl.api:latest
     build:
       context: .
       dockerfile: RPSSL.Api/Dockerfile
     ports:
       - "8080:80"
     environment:
-      - CODECHALLENGEAPI__BASEADDRESS=https://codechallenge.boohma.com
+      - CODECHALLENGEAPI__BASEADDRESS=${CODECHALLENGEAPI__BASEADDRESS}
 
   rpssl.frontend:
     container_name: rpssl-frontend
-    image: abeker/rpssl.frontend:latest
     build:
       context: ./frontend
       dockerfile: Dockerfile
