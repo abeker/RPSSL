@@ -1,5 +1,4 @@
-﻿using System.Net;
-using CSharpFunctionalExtensions;
+﻿using CSharpFunctionalExtensions;
 using Microsoft.Extensions.Logging;
 using Polly;
 using RPSSL.Application.Choices.Persistence;

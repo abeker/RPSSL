@@ -18,6 +18,7 @@ public class GetRandomChoiceQueryHandler(IRandomNumberRepository randomNumberRep
             .Bind(PositiveNumber.Create)
             .Bind(choiceService.GetByRandomNumber)
             .Map(choice => new RandomChoiceResponse((int)choice, choice.ToString()))
+            .Tap(choice => logger.LogInformation("Random choice '{Choice}' is generated", choice))
             .TapError(err => logger.LogError(err.ToString()));
     }
 }

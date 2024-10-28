@@ -2,6 +2,7 @@ using Microsoft.Extensions.DependencyInjection;
 using RPSSL.Application.Choices.GetChoices;
 using RPSSL.Application.Choices.GetRandomChoice;
 using RPSSL.Application.Games.PlayGameCommand;
+using RPSSL.Application.Players.GetPlayerByIdQuery;
 using RPSSL.Application.Players.GetScoreboardQuery;
 using RPSSL.Domain.Choices.Services;
 
@@ -15,5 +16,6 @@ public static class ServiceCollectionExtensions
             .AddMediatR(config => config.RegisterServicesFromAssemblies(typeof(GetRandomChoiceQuery).Assembly))
             .AddMediatR(config => config.RegisterServicesFromAssemblies(typeof(PlayGameCommand).Assembly))
             .AddMediatR(config => config.RegisterServicesFromAssemblies(typeof(GetScoreboardQuery).Assembly))
+            .AddMediatR(config => config.RegisterServicesFromAssemblies(typeof(GetPlayerByNameQuery).Assembly))
             .AddScoped<IChoiceService, ChoiceService>();
 }

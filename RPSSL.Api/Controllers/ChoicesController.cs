@@ -28,7 +28,7 @@ public class ChoicesController(ISender mediator, IErrorFactory errorFactory, IEr
     /// </summary>
     /// <response code="200">Successfully retrieved a random choice.</response>
     /// <response code="400">Invalid request parameters or a client error.</response>
-    [HttpGet("/random")]
+    [HttpGet("random")]
     [ActionName(nameof(GetRandomAsync))]
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IEnumerable<ChoiceResponse>))]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]

@@ -12,13 +12,13 @@ namespace RPSSL.Infrastructure.Persistence;
 
 public class PlayerRepository(InMemoryDbContext context, PlayerFactory playerFactory) : IPlayerRepository
 {
-    public async Task<UnitResult<ErrorList>> CreateAsync(Player player, CancellationToken cancellationToken)
+    public async Task<Result<Player, ErrorList>> CreateAsync(Player player, CancellationToken cancellationToken)
     {
         await context.Players.AddAsync(playerFactory.Create(player), cancellationToken);
 
         await context.SaveChangesAsync(cancellationToken);
 
-        return UnitResult.Success<ErrorList>();
+        return player;
     }
 
     public async Task<Result<Maybe<Player>, ErrorList>> GetByNameAsync(PlayerName name, CancellationToken cancellationToken)

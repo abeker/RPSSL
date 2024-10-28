@@ -6,7 +6,7 @@ using RPSSL.Api.Common.Errors.ErrorFactory;
 using RPSSL.Api.Contracts.Common;
 using RPSSL.Api.Contracts.Players;
 using RPSSL.Api.Factories.Players;
-using RPSSL.Application.Games.PlayGameCommand;
+using RPSSL.Application.Players.GetPlayerByIdQuery;
 using RPSSL.Application.Players.GetScoreboardQuery;
 
 namespace RPSSL.Api.Controllers;
@@ -26,7 +26,7 @@ public class PlayersController(ISender mediator, IErrorFactory errorFactory, IEr
     [ActionName(nameof(CreateAsync))]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public async Task<ActionResult<PlayGameResponse>> CreateAsync([FromBody] CreatePlayerRequest request) =>
+    public async Task<ActionResult> CreateAsync([FromBody] CreatePlayerRequest request) =>
         await mediator
             .Send(CreatePlayerCommandFactory.Create(request))
             .MapError(errorFactory.From)
@@ -41,13 +41,23 @@ public class PlayersController(ISender mediator, IErrorFactory errorFactory, IEr
     /// <param name="request">The pagination parameters for the scoreboard.</param>
     /// <response code="200">Scoreboard successfully retrieved.</response>
     /// <response code="400">Invalid request parameters or a client error.</response>
-    [HttpGet("/scoreboard")]
+    [HttpGet("scoreboard")]
     [ActionName(nameof(GetScoreboardAsync))]
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(ScoreboardResponse))]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<ActionResult<ScoreboardResponse>> GetScoreboardAsync([FromQuery] PageRequest request) =>
         await mediator
             .Send(new GetScoreboardQuery(request.Index, request.Size))
+            .MapError(errorFactory.From)
+            .Match(onSuccess: Ok, onFailure: errorResponseFactory.From);
+    
+    [HttpGet("name/{name}")]
+    [ActionName(nameof(GetScoreboardAsync))]
+    [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(ScoreboardResponse))]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task<ActionResult<ScoreboardResponse>> GetByNameAsync(string name) =>
+        await mediator
+            .Send(new GetPlayerByNameQuery(name))
             .MapError(errorFactory.From)
             .Match(onSuccess: Ok, onFailure: errorResponseFactory.From);
 }
