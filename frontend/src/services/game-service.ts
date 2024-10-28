@@ -1,4 +1,4 @@
-import {baseAxios} from '../axios/api-config';
+import {baseAxios, testAxios} from '../axios/api-config';
 import { Choice } from '../models/choice';
 import { Result } from '../models/result';
 
@@ -13,6 +13,6 @@ export async function fetchComputerChoice(): Promise<Choice> {
 }
 
 export async function playGame(choiceId: number): Promise<Result> {
-    const response = await baseAxios.post('/play', { player: choiceId });
+    const response = await testAxios.post('/play', { player: choiceId });
     return response.data;
 }

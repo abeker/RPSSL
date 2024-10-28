@@ -10,7 +10,7 @@ const ComputerChoice = ({ computerChoice, loading }: ComputerChoiceProps) => (
     <Box style={{ flex: 1, textAlign: 'center', color: 'dodgerBlue' }}>
         <Typography variant="h4">Computer choice</Typography>
         {loading ? (
-            <CircularProgress />
+            <CircularProgress sx={{ color: 'dodgerblue' }}/>
         ) : (
             <Typography variant="h5" >{computerChoice ? computerChoice.name : 'None'}</Typography>
         )}
