@@ -51,6 +51,13 @@ public class PlayersController(ISender mediator, IErrorFactory errorFactory, IEr
             .MapError(errorFactory.From)
             .Match(onSuccess: Ok, onFailure: errorResponseFactory.From);
     
+    /// <summary>
+    /// Returns player details by name.
+    /// </summary>
+    /// <param name="name">The name of the player to retrieve.</param>
+    /// <response code="200">Player details successfully retrieved.</response>
+    /// <response code="400">Invalid player name provided.</response>
+    /// <response code="404">Player not found.</response>
     [HttpGet("name/{name}")]
     [ActionName(nameof(GetScoreboardAsync))]
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(ScoreboardResponse))]
