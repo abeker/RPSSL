@@ -23,7 +23,6 @@ function RoutesComponent({
   computerChoice,
   gameResult,
   loading,
-  errorMessage,
   onLogin,
   onChoiceSelect,
 }: RoutesComponentProps) {
@@ -45,7 +44,7 @@ function RoutesComponent({
               onChoiceSelect={onChoiceSelect}
             />
           ) : (
-            <LoginPage onLogin={onLogin} errorMessage={errorMessage} />
+            <LoginPage onLogin={onLogin} />
           )
         }
       />

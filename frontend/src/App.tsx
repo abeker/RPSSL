@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { Container, ThemeProvider } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { fetchChoices, playGame } from "./services/game-service";
-import { createPlayer } from "./services/player-service";
 import { Choice } from "./models/choice";
 import { Result } from "./models/result";
 import Header from "./ui-elements/header";
@@ -10,7 +9,6 @@ import theme from "./theme";
 import "./App.css";
 import { getStoredUser, setUser, clearUser } from "./context/userContext";
 import RoutesComponent from "./RoutesComponent";
-import { AxiosError } from "axios";
 
 function App() {
   const [choices, setChoices] = useState<Choice[] | null>(null);
@@ -52,24 +50,12 @@ function App() {
     setLoading(false);
   };
 
-  const handleLogin = async (username: string) => {
-    if (username.trim()) {
-      try {
-        await createPlayer(username);
-        setUser(username);
-        setUsername(username);
-        setIsUserLoggedIn(true);
-        resetGameState();
-        navigate("/");
-      } catch (error) {
-        const axiosError = error as AxiosError;
-        if (axiosError.response && axiosError.response.status === 400) {
-            setErrorMessage("Player already exists, try with a new name.");
-        } else {
-            setErrorMessage("An error occurred. Please try again.");
-        }
-      }
-    }
+  const handleLogin = (username: string) => {
+    setUser(username);
+    setUsername(username);
+    setIsUserLoggedIn(true);
+    resetGameState();
+    navigate("/");
   };
 
   const handleLogout = () => {

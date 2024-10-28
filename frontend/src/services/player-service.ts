@@ -6,6 +6,11 @@ export async function createPlayer(playerName: string): Promise<void> {
     return response.data;
 }
 
+export async function getPlayerByName(playerName: string): Promise<void> {
+    const response = await baseAxios.get(`/players/name/${playerName}`);
+    return response.data;
+}
+
 export async function getScoreboard(index: number, size: number): Promise<Scoreboard> {
     const response = await baseAxios.get('/players/scoreboard', {
         params: {
