@@ -21,7 +21,8 @@ public class TestController(ISender mediator, IErrorFactory errorFactory, IError
     /// <summary>
     /// Returns all available choices
     /// </summary>
-    [HttpGet, Route("/choices")]
+    /// <response code="200">Successfully retrieved all available choices.</response>
+    [HttpGet("/choices")]
     [ActionName(nameof(GetChoicesAsync))]
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IEnumerable<ChoiceResponse>))]
     public async Task<ActionResult<IEnumerable<ChoiceResponse>>> GetChoicesAsync()
@@ -33,9 +34,12 @@ public class TestController(ISender mediator, IErrorFactory errorFactory, IError
     /// <summary>
     /// Returns a random choice
     /// </summary>
-    [HttpGet, Route("/choice")]
+    /// <response code="200">Successfully retrieved a random choice.</response>
+    /// <response code="400">Invalid request parameters or a client error.</response>
+    [HttpGet("/choice")]
     [ActionName(nameof(GetRandomChoiceAsync))]
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IEnumerable<ChoiceResponse>))]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<ActionResult<IEnumerable<ChoiceResponse>>> GetRandomChoiceAsync() =>
         await mediator
             .Send(new GetRandomChoiceQuery())
@@ -43,14 +47,18 @@ public class TestController(ISender mediator, IErrorFactory errorFactory, IError
             .Match(onSuccess: Ok, onFailure: errorResponseFactory.From);
     
     /// <summary>
-    /// Play a round with a computer
+    /// Play a round with a computer.
     /// </summary>
-    [HttpPost, Route("/play")]
+    /// <param name="request">The player's choice for the round.</param>
+    /// <response code="200">Successfully played a round and returned the result.</response>
+    /// <response code="400">Invalid request parameters or a client error.</response>
+    [HttpPost("/play")]
     [ActionName(nameof(PlayAsync))]
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(PlayGameResponse))]
-    public async Task<ActionResult<PlayGameResponse>> PlayAsync([FromBody] PlayGameTestRequest testRequest) =>
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task<ActionResult<PlayGameResponse>> PlayAsync([FromBody] PlayGameTestRequest request) =>
         await mediator
-            .Send(PlayGameCommandFactory.Create(testRequest))
+            .Send(PlayGameCommandFactory.Create(request))
             .MapError(errorFactory.From)
             .Match(onSuccess: Ok, onFailure: errorResponseFactory.From);
 }

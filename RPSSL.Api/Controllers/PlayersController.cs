@@ -17,8 +17,11 @@ namespace RPSSL.Api.Controllers;
 public class PlayersController(ISender mediator, IErrorFactory errorFactory, IErrorResponseFactory errorResponseFactory) : ControllerBase
 {
     /// <summary>
-    /// Creates a player
+    /// Creates a player.
     /// </summary>
+    /// <param name="request">The details of the player to be created.</param>
+    /// <response code="200">Player successfully created.</response>
+    /// <response code="400">Invalid input data for the player.</response>
     [HttpPost]
     [ActionName(nameof(CreateAsync))]
     [ProducesResponseType(StatusCodes.Status200OK)]
@@ -30,11 +33,18 @@ public class PlayersController(ISender mediator, IErrorFactory errorFactory, IEr
             .Match(onSuccess: Ok, onFailure: errorResponseFactory.From);
     
     /// <summary>
-    /// Returns a scoreboard 
+    /// Returns the scoreboard.
     /// </summary>
-    [HttpGet, Route("/scoreboard")]
+    /// <remarks>
+    /// This endpoint retrieves the scoreboard, which contains the ranking of players based on their performance.
+    /// </remarks>
+    /// <param name="request">The pagination parameters for the scoreboard.</param>
+    /// <response code="200">Scoreboard successfully retrieved.</response>
+    /// <response code="400">Invalid request parameters or a client error.</response>
+    [HttpGet("/scoreboard")]
     [ActionName(nameof(GetScoreboardAsync))]
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(ScoreboardResponse))]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<ActionResult<ScoreboardResponse>> GetScoreboardAsync([FromQuery] PageRequest request) =>
         await mediator
             .Send(new GetScoreboardQuery(request.Index, request.Size))

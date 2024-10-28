@@ -16,6 +16,7 @@ public class ChoicesController(ISender mediator, IErrorFactory errorFactory, IEr
     /// <summary>
     /// Returns all available choices
     /// </summary>
+    /// <response code="200">Successfully retrieved all available choices.</response>
     [HttpGet]
     [ActionName(nameof(GetAsync))]
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IEnumerable<ChoiceResponse>))]
@@ -23,11 +24,14 @@ public class ChoicesController(ISender mediator, IErrorFactory errorFactory, IEr
         Ok(await mediator.Send(new GetChoicesQuery()));
     
     /// <summary>
-    /// Returns random choice
+    /// Returns a random choice
     /// </summary>
-    [HttpGet, Route("/random")]
+    /// <response code="200">Successfully retrieved a random choice.</response>
+    /// <response code="400">Invalid request parameters or a client error.</response>
+    [HttpGet("/random")]
     [ActionName(nameof(GetRandomAsync))]
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IEnumerable<ChoiceResponse>))]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<ActionResult<IEnumerable<ChoiceResponse>>> GetRandomAsync() =>
         await mediator
             .Send(new GetRandomChoiceQuery())

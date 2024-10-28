@@ -15,11 +15,15 @@ namespace RPSSL.Api.Controllers;
 public class GamesController(ISender mediator, IErrorFactory errorFactory, IErrorResponseFactory errorResponseFactory) : ControllerBase
 {
     /// <summary>
-    /// Play a round with a computer
+    /// Play a round with a computer.
     /// </summary>
+    /// <param name="request">The player's choice for the round.</param>
+    /// <response code="200">Successfully played a round and returned the result.</response>
+    /// <response code="400">Invalid request parameters or a client error.</response>
     [HttpPost]
     [ActionName(nameof(PlayAsync))]
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(PlayGameResponse))]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<ActionResult<PlayGameResponse>> PlayAsync([FromBody] PlayGameRequest request) =>
         await mediator
             .Send(PlayGameCommandFactory.Create(request))

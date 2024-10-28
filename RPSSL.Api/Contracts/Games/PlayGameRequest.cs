@@ -2,4 +2,20 @@
 
 namespace RPSSL.Api.Contracts.Games;
 
-public record PlayGameRequest([Required] string Name, [Required] int Player);
+/// <summary>
+/// The request to play a game round.
+/// </summary>
+public record PlayGameRequest
+{
+    /// <summary>
+    /// The name of the player. This is a required field.
+    /// </summary>
+    [Required]
+    public string Name { get; init; }
+
+    /// <summary>
+    /// A player's choice represented as an integer. This is a required field.
+    /// </summary>
+    [Required]
+    public int Player { get; init; }
+}
