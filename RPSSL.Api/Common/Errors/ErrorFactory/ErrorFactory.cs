@@ -30,6 +30,7 @@ public class ErrorFactory(ILogger<ErrorFactory> logger) : IErrorFactory
             NullValueError err => new Status400Error(err),
             PositiveNumberOutOfRangeError err => new Status400Error(err),
             PageOutOfRangeError err => new Status400Error(err),
+            ExternalApiError err => new Status500Error(err),
             _ => new Status500Error(error),
         };
 

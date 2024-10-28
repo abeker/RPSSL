@@ -10,4 +10,5 @@ internal static class ErrorCodes
     internal const string EntityNotFoundErrorCode = "006";
     internal const string EntityAlreadyExistErrorCode = "007";
     internal const string PageOutOfRangeErrorCode = "008";
+    internal const string ExternalApiErrorCode = "009";
 }
