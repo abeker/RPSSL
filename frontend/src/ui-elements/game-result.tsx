@@ -34,18 +34,21 @@ const GameResult = ({ result }: GameResultProps) => {
             >
                 {getResultMessage(result)}
             </Typography>
-            <Link
-                component={RouterLink}
-                to="/scoreboard"
-                variant="body1"
-                style={{
-                    marginTop: '10px',
-                    display: 'block',
-                    color: theme.palette.primary.main
-                }}
-            >
-                View scoreboard
-            </Link>
+
+            {result && (
+                <Link
+                    component={RouterLink}
+                    to="/scoreboard"
+                    variant="body1"
+                    style={{
+                        marginTop: '10px',
+                        display: 'block',
+                        color: theme.palette.primary.main
+                    }}
+                >
+                    View scoreboard
+                </Link>
+            )}
         </>
     );
 };

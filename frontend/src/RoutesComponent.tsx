@@ -4,10 +4,9 @@ import { Result } from "./models/result";
 import GamePage from "./pages/game-page";
 import LoginPage from "./pages/login-page";
 import Scoreboard from "./pages/scoreboard";
+import { getStoredUser } from "./context/userContext";
 
 interface RoutesComponentProps {
-  isUserLoggedIn: boolean;
-  username: string;
   choices: Choice[] | null;
   userChoice: Choice | null;
   computerChoice: Choice | null;
@@ -19,8 +18,6 @@ interface RoutesComponentProps {
 }
 
 function RoutesComponent({
-  isUserLoggedIn,
-  username,
   choices,
   userChoice,
   computerChoice,
@@ -30,6 +27,8 @@ function RoutesComponent({
   onLogin,
   onChoiceSelect,
 }: RoutesComponentProps) {
+  const { isUserLoggedIn, username } = getStoredUser();
+
   return (
     <Routes>
       <Route
@@ -50,7 +49,7 @@ function RoutesComponent({
           )
         }
       />
-      <Route path="/scoreboard" element={<Scoreboard index={0} size={5}/>} />
+      <Route path="/scoreboard" element={<Scoreboard index={0} size={5} />} />
     </Routes>
   );
 }

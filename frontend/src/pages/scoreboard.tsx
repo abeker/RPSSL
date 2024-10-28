@@ -1,8 +1,9 @@
-import { Box, Typography, CircularProgress } from "@mui/material";
+import { Box, Typography, CircularProgress, Link } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useTheme } from "@mui/material/styles";
 import { getScoreboard } from "../services/player-service";
 import { Scoreboard as ScoreboardType } from "../models/scoreboard";
+import { Link as RouterLink } from "react-router-dom";
 
 interface ScoreboardProps {
   index: number;
@@ -55,6 +56,19 @@ const Scoreboard = ({ index, size }: ScoreboardProps) => {
           </Typography>
         ))}
       </Box>
+      <Link
+        component={RouterLink}
+        to="/"
+        variant="body1"
+        style={{
+          marginTop: '30px',
+          display: 'block',
+          color: theme.palette.primary.main,
+          textDecoration: 'underline'
+        }}
+      >
+        Play game
+      </Link>
     </Box>
   );
 };

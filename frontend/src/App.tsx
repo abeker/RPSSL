@@ -36,7 +36,7 @@ function App() {
     const { username, isUserLoggedIn } = getStoredUser();
     setUsername(username);
     setIsUserLoggedIn(isUserLoggedIn);
-  }, [isUserLoggedIn]);
+  }, []);
 
   const handleUserChoice = async (choice: Choice) => {
     setUserChoice(choice);
@@ -56,9 +56,11 @@ function App() {
     if (username.trim()) {
       try {
         await createPlayer(username);
-        setIsUserLoggedIn(true);
         setUser(username);
+        setUsername(username);
+        setIsUserLoggedIn(true);
         resetGameState();
+        navigate("/");
       } catch (error) {
         const axiosError = error as AxiosError;
         if (axiosError.response && axiosError.response.status === 400) {
@@ -101,8 +103,6 @@ function App() {
       >
         <Header onLogout={handleLogout} isUserLoggedIn={isUserLoggedIn} />
         <RoutesComponent
-          isUserLoggedIn={isUserLoggedIn}
-          username={username}
           choices={choices}
           userChoice={userChoice}
           computerChoice={computerChoice}
