@@ -2,7 +2,7 @@ using Microsoft.Extensions.DependencyInjection;
 using RPSSL.Application.Choices.GetChoices;
 using RPSSL.Application.Choices.GetRandomChoice;
 using RPSSL.Application.Games.PlayGameCommand;
-using RPSSL.Application.Players.GetPlayerByIdQuery;
+using RPSSL.Application.Players.GetPlayerByNameQuery;
 using RPSSL.Application.Players.GetScoreboardQuery;
 using RPSSL.Domain.Choices.Services;
 

@@ -8,7 +8,7 @@ using RPSSL.Domain.Common.Lists;
 using RPSSL.Domain.Players;
 using RPSSL.Domain.Players.Persistence;
 
-namespace RPSSL.Application.Players.GetPlayerByIdQuery;
+namespace RPSSL.Application.Players.GetPlayerByNameQuery;
 
 public class GetPlayerByNameQueryHandler(ILogger<GetPlayerByNameQueryHandler> logger, IPlayerRepository playerRepository) : IRequestHandler<GetPlayerByNameQuery, Result<PlayerResponse, ErrorList>>
 {

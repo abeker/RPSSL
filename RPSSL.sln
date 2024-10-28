@@ -17,6 +17,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		docker-compose.yml = docker-compose.yml
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RPSSL.Application.Tests", "tests\RPSSL.Application.Tests\RPSSL.Application.Tests.csproj", "{5E557A43-1304-42A1-BCB6-3F5410538651}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -43,8 +45,13 @@ Global
 		{265B8F6B-F288-484B-B847-DA13EA848BCC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{265B8F6B-F288-484B-B847-DA13EA848BCC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{265B8F6B-F288-484B-B847-DA13EA848BCC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5E557A43-1304-42A1-BCB6-3F5410538651}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5E557A43-1304-42A1-BCB6-3F5410538651}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5E557A43-1304-42A1-BCB6-3F5410538651}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5E557A43-1304-42A1-BCB6-3F5410538651}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{265B8F6B-F288-484B-B847-DA13EA848BCC} = {34185AAF-2939-416A-8EF4-04DF4EA6CA08}
+		{5E557A43-1304-42A1-BCB6-3F5410538651} = {34185AAF-2939-416A-8EF4-04DF4EA6CA08}
 	EndGlobalSection
 EndGlobal

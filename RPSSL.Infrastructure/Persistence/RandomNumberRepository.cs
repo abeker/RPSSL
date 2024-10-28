@@ -27,7 +27,7 @@ public class RandomNumberRepository(ICodeChallengeApiClient codeChallengeApiClie
 
         var fallbackPolicy = Policy<Result<int, ErrorList>>
             .Handle<Exception>()
-            .FallbackAsync((action) =>
+            .FallbackAsync(_ =>
             {
                 logger.LogError("All random number fetch retries failed.");
                 return Task.FromResult(Result.Failure<int, ErrorList>(new ExternalApiError(nameof(ICodeChallengeApiClient)).ToList()));
