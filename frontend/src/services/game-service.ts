@@ -1,5 +1,6 @@
 import {baseAxios, testAxios} from '../axios/api-config';
 import { Choice } from '../models/choice';
+import { GameRound } from '../models/gameRound';
 import { Result } from '../models/result';
 
 export async function fetchChoices(): Promise<Choice[]> {
@@ -12,7 +13,12 @@ export async function fetchComputerChoice(): Promise<Choice> {
     return response.data;
 }
 
-export async function playGame(choiceId: number): Promise<Result> {
+export async function playTestGame(choiceId: number): Promise<Result> {
     const response = await testAxios.post('/play', { player: choiceId });
+    return response.data;
+}
+
+export async function playGame(gameRound: GameRound): Promise<Result> {
+    const response = await baseAxios.post('/games', gameRound);
     return response.data;
 }

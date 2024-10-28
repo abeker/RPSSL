@@ -1,6 +1,7 @@
-import { Typography } from '@mui/material';
+import { Typography, Link } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import { useTheme } from '@mui/material/styles';
+import { Link as RouterLink } from 'react-router-dom';
 
 interface GameResultProps {
     result: string | null;
@@ -22,16 +23,30 @@ const GameResult = ({ result }: GameResultProps) => {
     const theme = useTheme();
 
     return (
-        <Typography
-            variant="h3"
-            className={classes.blinkingText}
-            style={{
-                marginTop: '20px',
-                color: theme.palette.secondary.main
-            }}
-        >
-            {getResultMessage(result)}
-        </Typography>
+        <>
+            <Typography
+                variant="h3"
+                className={classes.blinkingText}
+                style={{
+                    marginTop: '20px',
+                    color: theme.palette.secondary.main
+                }}
+            >
+                {getResultMessage(result)}
+            </Typography>
+            <Link
+                component={RouterLink}
+                to="/scoreboard"
+                variant="body1"
+                style={{
+                    marginTop: '10px',
+                    display: 'block',
+                    color: theme.palette.primary.main
+                }}
+            >
+                View scoreboard
+            </Link>
+        </>
     );
 };
 
