@@ -1,8 +1,8 @@
 using Microsoft.Extensions.DependencyInjection;
 using RPSSL.Application.Choices.GetChoices;
 using RPSSL.Application.Choices.GetRandomChoice;
-using RPSSL.Application.Games.GetScoreboardQuery;
 using RPSSL.Application.Games.PlayGameCommand;
+using RPSSL.Application.Players.GetScoreboardQuery;
 using RPSSL.Domain.Choices.Services;
 
 namespace RPSSL.Application.Common.Extensions;
