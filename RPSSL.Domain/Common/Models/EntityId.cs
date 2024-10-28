@@ -7,12 +7,12 @@ namespace RPSSL.Domain.Common.Models;
 
 public class EntityId : ValueObject
 {
+    public Guid Value { get; }
+    
     private EntityId(Guid value)
     {
         Value = value;
     }
-
-    public Guid Value { get; }
 
     public static Result<EntityId, ErrorList> Create(Guid value)
     {

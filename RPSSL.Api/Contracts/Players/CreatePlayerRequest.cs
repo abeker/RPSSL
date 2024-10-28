@@ -1,3 +1,5 @@
-﻿namespace RPSSL.Api.Contracts.Players;
+﻿using System.ComponentModel.DataAnnotations;
 
-public record CreatePlayerRequest(string Name);
+namespace RPSSL.Api.Contracts.Players;
+
+public record CreatePlayerRequest([Required] string Name);

@@ -33,7 +33,7 @@ public class PlayGameCommandHandler(
         var playerChoice = request.Choice.TryConvertToEnum<Choice>();
 
         var playerChoiceResult = await playerName.CombineToTuple(playerChoice)
-            .Bind(async tuple => await playerRepository.GetByNameAsync(tuple.Item1)
+            .Bind(async tuple => await playerRepository.GetByNameAsync(tuple.Item1, cancellationToken)
                 .Ensure(p => p.HasValue, _ => new EntityNotFoundError(nameof(Player)).ToList())
                 .Bind(playerResult => PlayerChoice.Create(playerResult.Value, tuple.Item2)));
 
@@ -45,7 +45,7 @@ public class PlayGameCommandHandler(
         return await playerChoiceResult.CombineToTuple(computerChoiceResult)
             .Bind(tuple => Game.Create(EntityId.Create(), tuple.Item1, tuple.Item2))
             .Bind(game => game.PlayRound(choiceService))
-            .Tap(async game => await gameRepository.CreateAsync(game))
+            .Tap(async game => await gameRepository.CreateAsync(game, cancellationToken))
             .Map(game => new PlayGameResponse(game.GameResult.ToString().ToLowerInvariant(), (int)game.PlayerChoice.Choice,
                 (int)game.ComputerChoice.Choice))
             .Tap(result => logger.LogInformation("Player '{PlayerName}' {GameResult}", request.Name, result.Results))

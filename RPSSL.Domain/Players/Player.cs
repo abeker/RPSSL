@@ -7,8 +7,8 @@ namespace RPSSL.Domain.Players;
 
 public class Player : Entity
 {
-    public static readonly Player Computer = new(EntityId.Create(), PlayerName.Create("Computer").Value);
-    public static readonly Player Anonymous = new(EntityId.Create(), PlayerName.Create("Anonymous").Value);
+    public static readonly Player Computer = new(EntityId.Create(), PlayerName.Create(nameof(Computer)).Value);
+    public static readonly Player Anonymous = new(EntityId.Create(), PlayerName.Create(nameof(Anonymous)).Value);
     
     public PlayerName Name { get; }
 

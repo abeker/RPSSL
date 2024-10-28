@@ -29,6 +29,7 @@ public class ErrorFactory(ILogger<ErrorFactory> logger) : IErrorFactory
             EnumOutOfRangeError err => new Status400Error(err),
             NullValueError err => new Status400Error(err),
             PositiveNumberOutOfRangeError err => new Status400Error(err),
+            PageOutOfRangeError err => new Status400Error(err),
             _ => new Status500Error(error),
         };
 

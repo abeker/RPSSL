@@ -6,5 +6,6 @@ public class Game
 {
     public Guid Id { get; init; }
     public Guid PlayerId { get; init; }
+    public Player Player { get; init; }
     public GameResult Result { get; init; }
 }

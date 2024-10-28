@@ -5,8 +5,8 @@ namespace RPSSL.Infrastructure.Persistence.Configuration;
 
 public class InMemoryDbContext(DbContextOptions<InMemoryDbContext> options) : DbContext(options)
 {
-    public DbSet<Game> Games { get; set; }
-    public DbSet<Player> Players { get; set; }
+    public DbSet<Game> Games { get; init; }
+    public DbSet<Player> Players { get; init; }
     
     public void Seed()
     {

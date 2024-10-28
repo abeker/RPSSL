@@ -1,3 +1,5 @@
-﻿namespace RPSSL.Api.Contracts.Games;
+﻿using System.ComponentModel.DataAnnotations;
 
-public record PlayGameRequest(string Name, int Player);
+namespace RPSSL.Api.Contracts.Games;
+
+public record PlayGameRequest([Required] string Name, [Required] int Player);
