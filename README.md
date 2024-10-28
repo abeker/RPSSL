@@ -15,20 +15,27 @@
 - You can access the game through the web interface at `http://localhost`, where you can play against the computer.
 - Alternatively, you can use the following API routes:
 
-  - **GET /choice**: This endpoint gives you a random choice from the game.
+  - **GET /choice** or **GET /api/v1.0/choices/random**: This endpoint gives you a random choice from the game.
   
-  - **GET /choices**: This returns all the available choices you can make in the game.
+  - **GET /choices** or **GET /api/v1.0/choices**: This returns all the available choices you can make in the game.
   
-  - **POST /play**: Use this to play a round against the computer. You need to provide a parameter in the format `{ "player": int }` (where `int` is your choice's ID). The response will tell you who won, along with the choices made:
+  - **POST /play** or **POST /api/v1.0/games**: Use this to play a round against the computer. You need to provide a parameter in the format `{ "player": int }` (where `int` is your choice's ID). The response will tell you who won, along with the choices made:
     - **Results**: Indicates whether you won, lost, or tied.
     - **Player**: Your choice's ID.
     - **Computer**: The computer's choice's ID.
+
+  - **POST /api/v1.0/players**: Use this endpoint to create a new player. You need to provide a request body in the format `{ "name": "string" }` (where `"string"` is the player's name). The response will confirm the player's creation.
+  
+  - **GET /api/v1.0/scoreboard**: This endpoint retrieves the scoreboard, showing the ranking of players based on their performance in the game. You can provide pagination parameters as query strings, e.g., `?index=0&size=10`.
+
 
 ## Features
 - Play against a computer opponent through a user-friendly web interface.
 - Access a random choice with the **GET /choice** endpoint.
 - Retrieve all available game choices using the **GET /choices** endpoint.
 - Play a round against the computer with the **POST /play** endpoint.
+- Add new players using the **POST /api/v1.0/players** endpoint.
+- Retrieve the scoreboard with the **GET /api/v1.0/scoreboard** endpoint.
 - Swagger documentation for easy API exploration and understanding.
 
 ## Contact Information
