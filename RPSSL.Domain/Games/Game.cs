@@ -2,6 +2,7 @@
 using RPSSL.Domain.Choices;
 using RPSSL.Domain.Choices.Services;
 using RPSSL.Domain.Common.Collections;
+using RPSSL.Domain.Common.Guards;
 using RPSSL.Domain.Common.Models;
 using RPSSL.Domain.Players;
 
@@ -35,6 +36,10 @@ public class Game : AggregateRoot<Guid>
     
     public static Result<Game, ErrorList> Create(Guid id, Player player, Choice playerChoice, Player computer, Choice computerChoice)
     {
+        Ensure.NotEmpty(id, $"{nameof(Game)} {nameof(Id)} must be provided", nameof(id));
+        Ensure.NotNull(player, nameof(player));
+        Ensure.NotNull(computer, nameof(computer));
+        
         return new Game(id, player, playerChoice, computer, computerChoice);
     }
     

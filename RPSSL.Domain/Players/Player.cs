@@ -1,5 +1,6 @@
 ﻿using CSharpFunctionalExtensions;
 using RPSSL.Domain.Common.Collections;
+using RPSSL.Domain.Common.Guards;
 using RPSSL.Domain.Common.Models;
 
 namespace RPSSL.Domain.Players;
@@ -28,11 +29,8 @@ public class Player : AggregateRoot<Guid>
     
     public static Result<Player, ErrorList> Create(Guid id, PlayerName name)
     {
-        if (id == Guid.Empty)
-            throw new ArgumentException("Player id must be provided");
-        
-        if (name == null)
-            throw new ArgumentException("Player name must be provided");
+        Ensure.NotEmpty(id, $"{nameof(Player)} {nameof(Id)} must be provided", nameof(id));
+        Ensure.NotNull(name, nameof(name));
         
         return new Player(id, name);
     }

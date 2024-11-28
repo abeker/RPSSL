@@ -1,6 +1,7 @@
 ﻿using CSharpFunctionalExtensions;
 using RPSSL.Domain.Choices;
 using RPSSL.Domain.Common.Collections;
+using RPSSL.Domain.Common.Guards;
 
 namespace RPSSL.Domain.Players;
 
@@ -17,8 +18,7 @@ public class PlayerChoice : ValueObject
 
     public static Result<PlayerChoice, ErrorList> Create(Player player, Choice choice)
     {
-        if (player is null)
-            throw new ArgumentException("Player must be provided");
+        Ensure.NotNull(player, nameof(player));
         
         return new PlayerChoice(player, choice);
     }
