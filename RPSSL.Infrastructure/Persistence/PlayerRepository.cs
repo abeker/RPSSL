@@ -1,6 +1,6 @@
 ﻿using CSharpFunctionalExtensions;
 using Microsoft.EntityFrameworkCore;
-using RPSSL.Domain.Common.Lists;
+using RPSSL.Domain.Common.Collections;
 using RPSSL.Domain.Common.Models;
 using RPSSL.Domain.Games;
 using RPSSL.Domain.Players;

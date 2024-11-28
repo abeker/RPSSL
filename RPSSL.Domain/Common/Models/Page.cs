@@ -1,11 +1,11 @@
 ﻿using CSharpFunctionalExtensions;
+using RPSSL.Domain.Common.Collections;
 using RPSSL.Domain.Common.Errors;
 using RPSSL.Domain.Common.Errors.Extensions;
-using RPSSL.Domain.Common.Lists;
 
 namespace RPSSL.Domain.Common.Models;
 
-public class Page : ValueObject
+public sealed class Page : ValueObject
 {
     public int Index { get; }
     public int Size { get; }

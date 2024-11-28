@@ -1,5 +1,5 @@
 ﻿using CSharpFunctionalExtensions;
-using RPSSL.Domain.Common.Lists;
+using RPSSL.Domain.Common.Collections;
 using RPSSL.Domain.Games.Persistence;
 using RPSSL.Infrastructure.Persistence.Configuration;
 using Game = RPSSL.Domain.Games.Game;

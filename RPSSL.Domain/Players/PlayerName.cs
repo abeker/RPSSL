@@ -1,7 +1,7 @@
 ﻿using CSharpFunctionalExtensions;
+using RPSSL.Domain.Common.Collections;
 using RPSSL.Domain.Common.Errors;
 using RPSSL.Domain.Common.Errors.Extensions;
-using RPSSL.Domain.Common.Lists;
 
 namespace RPSSL.Domain.Players;
 
@@ -24,5 +24,10 @@ public class PlayerName : ValueObject
     protected override IEnumerable<object> GetEqualityComponents()
     {
         yield return Value;
+    }
+    
+    public static implicit operator string (PlayerName name)
+    {
+        return name.Value;
     }
 }

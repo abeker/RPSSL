@@ -1,5 +1,5 @@
-﻿using RPSSL.Domain.Common.Errors.Abstractions;
-using RPSSL.Domain.Common.Lists;
+﻿using RPSSL.Domain.Common.Collections;
+using RPSSL.Domain.Common.Errors.Abstractions;
 
 namespace RPSSL.Domain.Common.Errors.Extensions;
 

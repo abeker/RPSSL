@@ -1,13 +1,12 @@
 ﻿using CSharpFunctionalExtensions;
 using RPSSL.Domain.Choices.Services;
-using RPSSL.Domain.Common.Lists;
+using RPSSL.Domain.Common.Collections;
 using RPSSL.Domain.Common.Models;
 using RPSSL.Domain.Players;
-using Entity = RPSSL.Domain.Common.Models.Entity;
 
 namespace RPSSL.Domain.Games;
 
-public class Game : Entity
+public class Game : AggregateRoot
 {
     public PlayerChoice PlayerChoice { get; }
     public PlayerChoice ComputerChoice { get; }

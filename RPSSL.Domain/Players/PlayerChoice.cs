@@ -1,6 +1,6 @@
 ﻿using CSharpFunctionalExtensions;
 using RPSSL.Domain.Choices;
-using RPSSL.Domain.Common.Lists;
+using RPSSL.Domain.Common.Collections;
 
 namespace RPSSL.Domain.Players;
 

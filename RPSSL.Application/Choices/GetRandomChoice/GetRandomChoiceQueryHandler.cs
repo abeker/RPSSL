@@ -4,7 +4,7 @@ using Microsoft.Extensions.Logging;
 using RPSSL.Application.Choices.Persistence;
 using RPSSL.Domain.Choices;
 using RPSSL.Domain.Choices.Services;
-using RPSSL.Domain.Common.Lists;
+using RPSSL.Domain.Common.Collections;
 
 namespace RPSSL.Application.Choices.GetRandomChoice;
 

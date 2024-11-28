@@ -1,5 +1,5 @@
 ﻿using CSharpFunctionalExtensions;
-using RPSSL.Domain.Common.Lists;
+using RPSSL.Domain.Common.Collections;
 
 namespace RPSSL.Application.Choices.Persistence;
 

@@ -1,11 +1,10 @@
 ﻿using CSharpFunctionalExtensions;
-using RPSSL.Domain.Common.Lists;
+using RPSSL.Domain.Common.Collections;
 using RPSSL.Domain.Common.Models;
-using Entity = RPSSL.Domain.Common.Models.Entity;
 
 namespace RPSSL.Domain.Players;
 
-public class Player : Entity
+public class Player : AggregateRoot
 {
     public static readonly Player Computer = new(EntityId.Create(), PlayerName.Create(nameof(Computer)).Value);
     public static readonly Player Anonymous = new(EntityId.Create(), PlayerName.Create(nameof(Anonymous)).Value);

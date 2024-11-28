@@ -2,9 +2,9 @@
 using Microsoft.Extensions.Logging;
 using Polly;
 using RPSSL.Application.Choices.Persistence;
+using RPSSL.Domain.Common.Collections;
 using RPSSL.Domain.Common.Errors;
 using RPSSL.Domain.Common.Errors.Extensions;
-using RPSSL.Domain.Common.Lists;
 using RPSSL.Infrastructure.ApiClients.CodeChallenge;
 
 namespace RPSSL.Infrastructure.Persistence;

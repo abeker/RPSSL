@@ -1,7 +1,7 @@
 ﻿using CSharpFunctionalExtensions;
 using RPSSL.Domain.Common.Errors.Abstractions;
 
-namespace RPSSL.Domain.Common.Lists;
+namespace RPSSL.Domain.Common.Collections;
 
 public class ErrorList : CombinableList<IError>
 {

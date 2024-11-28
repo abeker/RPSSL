@@ -1,11 +1,11 @@
 ﻿using CSharpFunctionalExtensions;
+using RPSSL.Domain.Common.Collections;
 using RPSSL.Domain.Common.Errors;
 using RPSSL.Domain.Common.Errors.Extensions;
-using RPSSL.Domain.Common.Lists;
 
 namespace RPSSL.Domain.Common.Models;
 
-public class EntityId : ValueObject
+public sealed class EntityId : ValueObject
 {
     public Guid Value { get; }
     
@@ -34,5 +34,10 @@ public class EntityId : ValueObject
     public override string ToString()
     {
         return Value.ToString();
+    }
+
+    public static implicit operator Guid (EntityId entityId)
+    {
+        return entityId.Value;
     }
 }

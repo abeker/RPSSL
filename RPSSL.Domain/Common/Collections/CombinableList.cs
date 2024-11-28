@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using CSharpFunctionalExtensions;
 
-namespace RPSSL.Domain.Common.Lists;
+namespace RPSSL.Domain.Common.Collections;
 
 public class CombinableList<T> : ICombine, IList<T>
 {

@@ -6,9 +6,9 @@ using RPSSL.Application.Choices.GetRandomChoice;
 using RPSSL.Application.Choices.Persistence;
 using RPSSL.Domain.Choices;
 using RPSSL.Domain.Choices.Services;
+using RPSSL.Domain.Common.Collections;
 using RPSSL.Domain.Common.Errors;
 using RPSSL.Domain.Common.Errors.Extensions;
-using RPSSL.Domain.Common.Lists;
 using Xunit;
 
 namespace RPSSL.Application.Tests.Choices;

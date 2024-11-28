@@ -1,6 +1,6 @@
 ﻿using CSharpFunctionalExtensions;
 using RPSSL.Application.Common.Queries;
-using RPSSL.Domain.Common.Lists;
+using RPSSL.Domain.Common.Collections;
 
 namespace RPSSL.Application.Players.GetScoreboardQuery;
 
