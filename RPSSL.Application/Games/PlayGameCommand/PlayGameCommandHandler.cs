@@ -34,8 +34,8 @@ public class PlayGameCommandHandler(
 
         var playerChoiceResult = await playerName.CombineToTuple(playerChoice)
             .Bind(async tuple => await playerRepository.GetByNameAsync(tuple.Item1, cancellationToken)
-                .Ensure(p => p.HasValue, _ => new EntityNotFoundError(nameof(Player)).ToList())
-                .Bind(playerResult => PlayerChoice.Create(playerResult.Value, tuple.Item2)));
+                .Ensure(maybePlayer => maybePlayer.HasValue, _ => new EntityNotFoundError(nameof(Player)).ToList())
+                .Bind(player => PlayerChoice.Create(player.Value, tuple.Item2)));
 
         var computerChoiceResult = await randomNumberRepository.GenerateAsync(cancellationToken)
             .Bind(PositiveNumber.Create)
@@ -43,11 +43,10 @@ public class PlayGameCommandHandler(
             .Bind(randomChoice => PlayerChoice.Create(Player.Computer, randomChoice));
         
         return await playerChoiceResult.CombineToTuple(computerChoiceResult)
-            .Bind(tuple => Game.Create(EntityId.Create(), tuple.Item1, tuple.Item2))
+            .Bind(tuple => Game.Create(EntityId.Create(), tuple.Item1.Player, tuple.Item1.Choice, tuple.Item2.Player, tuple.Item2.Choice))
             .Bind(game => game.PlayRound(choiceService))
             .Tap(async game => await gameRepository.CreateAsync(game, cancellationToken))
-            .Map(game => new PlayGameResponse(game.GameResult.ToString().ToLowerInvariant(), (int)game.PlayerChoice.Choice,
-                (int)game.ComputerChoice.Choice))
+            .Map(game => new PlayGameResponse(game.GameResult.ToString().ToLowerInvariant(), (int)game.PlayerChoice, (int)game.ComputerChoice))
             .Tap(result => logger.LogInformation("Player '{PlayerName}' {GameResult}", request.Name, result.Results))
             .TapError(err => logger.LogError(err.ToString()));
     }

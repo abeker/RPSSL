@@ -1,4 +1,5 @@
 ﻿using CSharpFunctionalExtensions;
+using Microsoft.EntityFrameworkCore;
 using RPSSL.Domain.Common.Collections;
 using RPSSL.Domain.Games.Persistence;
 using RPSSL.Infrastructure.Persistence.Configuration;
@@ -10,12 +11,9 @@ public class GameRepository(InMemoryDbContext context) : IGameRepository
 {
     public async Task<Result<Game, ErrorList>> CreateAsync(Game game, CancellationToken cancellationToken)
     {
-        await context.Games.AddAsync(new Entities.Game
-        {
-            Id = game.Id.Value,
-            PlayerId = game.PlayerChoice.Player.Id.Value,
-            Result = game.GameResult
-        }, cancellationToken);
+        context.Attach(game.Player);    // TODO: code smell
+        
+        await context.Games.AddAsync(game, cancellationToken);
 
         await context.SaveChangesAsync(cancellationToken);
 

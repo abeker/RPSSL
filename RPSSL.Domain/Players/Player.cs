@@ -11,6 +11,16 @@ public class Player : AggregateRoot
     
     public PlayerName Name { get; }
 
+    /// <summary>
+    /// Initializes a new instance of the <see cref="Player"/> class.
+    /// </summary>
+    /// <remarks>
+    /// Required by EF Core.
+    /// </remarks>
+    protected Player()
+    {
+    }
+
     private Player(EntityId id, PlayerName name) : base(id)
     {
         Name = name;

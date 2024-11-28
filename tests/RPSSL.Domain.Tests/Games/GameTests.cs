@@ -23,12 +23,12 @@ public class GameTests
         var computerChoice = PlayerChoice.Create(Player.Computer, Choice.Scissors).Value;
 
         // Act
-        var result = Game.Create(gameId, playerChoice, computerChoice);
+        var result = Game.Create(gameId, playerChoice.Player, playerChoice.Choice, computerChoice.Player, computerChoice.Choice);
 
         // Assert
         result.IsSuccess.Should().BeTrue();
-        result.Value.PlayerChoice.Should().Be(playerChoice);
-        result.Value.ComputerChoice.Should().Be(computerChoice);
+        result.Value.PlayerChoice.Should().Be(playerChoice.Choice);
+        result.Value.ComputerChoice.Should().Be(computerChoice.Choice);
     }
 
     [Fact]
@@ -38,7 +38,7 @@ public class GameTests
         var gameId = EntityId.Create();
         var playerChoice = PlayerChoice.Create(Player.Create(gameId, PlayerName.Create("Alice").Value).Value, Choice.Rock).Value;
         var computerChoice = PlayerChoice.Create(Player.Computer, Choice.Scissors).Value;
-        var game = Game.Create(gameId, playerChoice, computerChoice).Value;
+        var game = Game.Create(gameId, playerChoice.Player, playerChoice.Choice, computerChoice.Player, computerChoice.Choice).Value;
 
         choiceServiceMock.Setup(c => c.CalculateWinner(playerChoice.Choice, computerChoice.Choice)).Returns(playerChoice.Choice);
         
@@ -57,7 +57,7 @@ public class GameTests
         var playerChoice = PlayerChoice.Create(Player.Create(gameId, PlayerName.Create("Alice").Value).Value, Choice.Rock).Value;
         var computerChoice = PlayerChoice.Create(Player.Computer, Choice.Paper).Value;
 
-        var game = Game.Create(gameId, playerChoice, computerChoice).Value;
+        var game = Game.Create(gameId, playerChoice.Player, playerChoice.Choice, computerChoice.Player, computerChoice.Choice).Value;
 
         choiceServiceMock.Setup(c => c.CalculateWinner(playerChoice.Choice, computerChoice.Choice)).Returns(computerChoice.Choice);
 
@@ -76,7 +76,7 @@ public class GameTests
         var playerChoice = PlayerChoice.Create(Player.Create(gameId, PlayerName.Create("Alice").Value).Value, Choice.Rock).Value;
         var computerChoice = PlayerChoice.Create(Player.Computer, Choice.Rock).Value;
 
-        var game = Game.Create(gameId, playerChoice, computerChoice).Value;
+        var game = Game.Create(gameId, playerChoice.Player, playerChoice.Choice, computerChoice.Player, computerChoice.Choice).Value;
 
         choiceServiceMock.Setup(c => c.CalculateWinner(playerChoice.Choice, computerChoice.Choice)).Returns(Maybe.None);
 

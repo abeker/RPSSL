@@ -1,5 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore;
-using RPSSL.Infrastructure.Persistence.Entities;
+﻿using System.Reflection;
+using Microsoft.EntityFrameworkCore;
+using RPSSL.Domain.Games;
+using RPSSL.Domain.Players;
 
 namespace RPSSL.Infrastructure.Persistence.Configuration;
 
@@ -12,17 +14,15 @@ public class InMemoryDbContext(DbContextOptions<InMemoryDbContext> options) : Db
     {
         if (!Players.Any())
         {
-            Players.AddRange(new Player
-            {
-                Id = Domain.Players.Player.Computer.Id.Value,
-                Name = Domain.Players.Player.Computer.Name.Value
-            },
-            new Player
-            {
-                Id = Domain.Players.Player.Anonymous.Id.Value,
-                Name = Domain.Players.Player.Anonymous.Name.Value
-            });
+            Players.AddRange(Player.Computer, Player.Anonymous);
             SaveChanges();
         }
+    }
+    
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
+
+        base.OnModelCreating(modelBuilder);
     }
 }

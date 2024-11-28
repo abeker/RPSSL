@@ -20,7 +20,7 @@ public class GetPlayerByNameQueryHandler(ILogger<GetPlayerByNameQueryHandler> lo
         return await playerName
             .Bind(async name => await playerRepository.GetByNameAsync(name, cancellationToken))
             .Ensure(p => p.HasValue, _ => new EntityNotFoundError(nameof(Player)).ToList())
-            .Map(player => new PlayerResponse(player.Value.Id.Value, player.Value.Name.Value))
+            .Map(player => new PlayerResponse(player.Value.Id, player.Value.Name.Value))
             .Tap(() => logger.LogInformation("Player with name '{PlayerName}' successfully fetched", request.Name))
             .TapError(err => logger.LogError(err.ToString()));
     }

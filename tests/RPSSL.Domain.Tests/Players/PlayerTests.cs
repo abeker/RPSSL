@@ -57,6 +57,6 @@ public class PlayerTests
 
         // Act & Assert
         computerPlayer.Name.Value.Should().Be("Computer");
-        computerPlayer.Id.Should().NotBeNull();
+        computerPlayer.Id.Should().NotBeEmpty();
     }
 }

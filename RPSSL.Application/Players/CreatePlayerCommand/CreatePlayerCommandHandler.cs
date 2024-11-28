@@ -24,7 +24,7 @@ public class CreatePlayerCommandHandler(ILogger<CreatePlayerCommandHandler> logg
             .Ensure(p => p.HasNoValue, _ => new EntityAlreadyExistsError(nameof(Player)).ToList())
             .Bind(_ => Player.Create(EntityId.Create(), playerName.Value))
             .Bind(async player => await playerRepository.CreateAsync(player, cancellationToken))
-            .Map(player => new PlayerResponse(player.Id.Value, player.Name.Value))
+            .Map(player => new PlayerResponse(player.Id, player.Name.Value))
             .Tap(() => logger.LogInformation("Player with name '{PlayerName}' successfully created", request.Name))
             .TapError(err => logger.LogError(err.ToString()));
     }

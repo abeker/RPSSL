@@ -7,6 +7,8 @@ namespace RPSSL.Domain.Players;
 
 public class PlayerName : ValueObject
 {
+    public const int NameMaxLength = 50;
+    
     public string Value { get; }
 
     private PlayerName(string value)

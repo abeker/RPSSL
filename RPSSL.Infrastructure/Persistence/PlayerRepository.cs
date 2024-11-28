@@ -6,15 +6,14 @@ using RPSSL.Domain.Games;
 using RPSSL.Domain.Players;
 using RPSSL.Domain.Players.Persistence;
 using RPSSL.Infrastructure.Persistence.Configuration;
-using RPSSL.Infrastructure.Persistence.Factories;
 
 namespace RPSSL.Infrastructure.Persistence;
 
-public class PlayerRepository(InMemoryDbContext context, PlayerFactory playerFactory) : IPlayerRepository
+public class PlayerRepository(InMemoryDbContext context) : IPlayerRepository
 {
     public async Task<Result<Player, ErrorList>> CreateAsync(Player player, CancellationToken cancellationToken)
     {
-        await context.Players.AddAsync(playerFactory.Create(player), cancellationToken);
+        await context.Players.AddAsync(player, cancellationToken);
 
         await context.SaveChangesAsync(cancellationToken);
 
@@ -23,8 +22,9 @@ public class PlayerRepository(InMemoryDbContext context, PlayerFactory playerFac
 
     public async Task<Result<Maybe<Player>, ErrorList>> GetByNameAsync(PlayerName name, CancellationToken cancellationToken)
     {
-        var player = await context.Players
-            .FirstOrDefaultAsync(p => p.Name == name.Value, cancellationToken: cancellationToken);
+        var player = await context.Set<Player>()
+            .AsNoTracking()
+            .FirstOrDefaultAsync(p => p.Name.Value == name.Value, cancellationToken: cancellationToken);
         
         if (player is null)
             return Result.Success<Maybe<Player>, ErrorList>(Maybe.None);
@@ -36,12 +36,12 @@ public class PlayerRepository(InMemoryDbContext context, PlayerFactory playerFac
     {
         var playersWithWins = await context.Games
             .Include(g => g.Player)
-            .GroupBy(g => g.Player)
+            .GroupBy(g => new {g.Player.Id, g.Player.Name.Value})
             .Select(g => new 
             {
                 Player = g.Key,
-                Wins = g.Count(game => game.Result == GameResult.Win),
-                Losses = g.Count(game => game.Result == GameResult.Lose)
+                Wins = g.Count(game => game.GameResult == GameResult.Win),
+                Losses = g.Count(game => game.GameResult == GameResult.Lose)
             })
             .OrderByDescending(x => x.Wins)
             .ThenBy(x => x.Losses)
@@ -51,7 +51,7 @@ public class PlayerRepository(InMemoryDbContext context, PlayerFactory playerFac
             .ToListAsync(cancellationToken);
 
         return playersWithWins
-            .Select(p => Player.Create(EntityId.Create(p.Id).Value, PlayerName.Create(p.Name).Value).Value)
+            .Select(p => Player.Create(EntityId.Create(p.Id).Value, PlayerName.Create(p.Value).Value).Value)
             .ToList();
     }
 }

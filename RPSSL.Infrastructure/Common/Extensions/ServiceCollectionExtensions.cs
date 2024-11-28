@@ -10,7 +10,6 @@ using RPSSL.Infrastructure.ApiClients.CodeChallenge;
 using RPSSL.Infrastructure.Configuration;
 using RPSSL.Infrastructure.Persistence;
 using RPSSL.Infrastructure.Persistence.Configuration;
-using RPSSL.Infrastructure.Persistence.Factories;
 
 namespace RPSSL.Infrastructure.Common.Extensions;
 
@@ -35,12 +34,11 @@ public static class ServiceCollectionExtensions
                     .Get<CodeChallengeApiOptions>();
                 c.BaseAddress = new Uri(apiOptions!.BaseAddress);
             });
-        
+
         services
             .AddScoped<IRandomNumberRepository, RandomNumberRepository>()
             .AddScoped<IPlayerRepository, PlayerRepository>()
-            .AddScoped<IGameRepository, GameRepository>()
-            .AddScoped<PlayerFactory>();
+            .AddScoped<IGameRepository, GameRepository>();
 
         return services;
     }

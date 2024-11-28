@@ -42,7 +42,7 @@ public class CreatePlayerCommandHandlerTests
         var result = await handler.Handle(request, CancellationToken.None);
 
         result.IsSuccess.Should().BeTrue();
-        result.Value.Should().BeEquivalentTo(new PlayerResponse(player.Id.Value, player.Name.Value));
+        result.Value.Should().BeEquivalentTo(new PlayerResponse(player.Id, player.Name.Value));
     }
 
     [Fact]
