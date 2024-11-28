@@ -22,14 +22,13 @@ public class PlayerRepository(InMemoryDbContext context) : IPlayerRepository
 
     public async Task<Result<Maybe<Player>, ErrorList>> GetByNameAsync(PlayerName name, CancellationToken cancellationToken)
     {
-        var player = await context.Set<Player>()
-            .AsNoTracking()
+        var player = await context.Players
             .FirstOrDefaultAsync(p => p.Name.Value == name.Value, cancellationToken: cancellationToken);
         
         if (player is null)
             return Result.Success<Maybe<Player>, ErrorList>(Maybe.None);
 
-        return Result.Success<Maybe<Player>, ErrorList>(Player.Create(player.Id, PlayerName.Create(player.Name).Value).Value);
+        return Result.Success<Maybe<Player>, ErrorList>(player);
     }
 
     public async Task<Result<IEnumerable<Player>, ErrorList>> GetScoreboardByPageAsync(Page page, CancellationToken cancellationToken)

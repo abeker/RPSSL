@@ -10,8 +10,6 @@ public class GameRepository(InMemoryDbContext context) : IGameRepository
 {
     public async Task<Result<Game, ErrorList>> CreateAsync(Game game, CancellationToken cancellationToken)
     {
-        context.Attach(game.Player);    // TODO: code smell
-        
         await context.Games.AddAsync(game, cancellationToken);
 
         await context.SaveChangesAsync(cancellationToken);
