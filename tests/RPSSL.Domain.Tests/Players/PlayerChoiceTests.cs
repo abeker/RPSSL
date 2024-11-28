@@ -1,6 +1,5 @@
 ﻿using FluentAssertions;
 using RPSSL.Domain.Choices;
-using RPSSL.Domain.Common.Models;
 using RPSSL.Domain.Players;
 using Xunit;
 
@@ -12,7 +11,7 @@ public class PlayerChoiceTests
     public void Create_WhenCalledWithValidPlayerAndChoice_ThenReturnsSuccessResult()
     {
         // Arrange
-        var playerResult = Player.Create(EntityId.Create(), PlayerName.Create("John Doe").Value);
+        var playerResult = Player.Create(Guid.NewGuid(), PlayerName.Create("John Doe").Value);
         const Choice choice = Choice.Rock;
 
         // Act
@@ -42,7 +41,7 @@ public class PlayerChoiceTests
     public void Create_WhenCalledWithValidPlayerAndDefaultChoice_ThenReturnsSuccessResult()
     {
         // Arrange
-        var playerResult = Player.Create(EntityId.Create(), PlayerName.Create("Jane Doe").Value).Value;
+        var playerResult = Player.Create(Guid.NewGuid(), PlayerName.Create("Jane Doe").Value).Value;
         const Choice choice = default;
 
         // Act

@@ -4,10 +4,10 @@ using RPSSL.Domain.Common.Models;
 
 namespace RPSSL.Domain.Players;
 
-public class Player : AggregateRoot
+public class Player : AggregateRoot<Guid>
 {
-    public static readonly Player Computer = new(EntityId.Create(), PlayerName.Create(nameof(Computer)).Value);
-    public static readonly Player Anonymous = new(EntityId.Create(), PlayerName.Create(nameof(Anonymous)).Value);
+    public static readonly Player Computer = new(Guid.NewGuid(), PlayerName.Create(nameof(Computer)).Value);
+    public static readonly Player Anonymous = new(Guid.NewGuid(), PlayerName.Create(nameof(Anonymous)).Value);
     
     public PlayerName Name { get; }
 
@@ -21,14 +21,14 @@ public class Player : AggregateRoot
     {
     }
 
-    private Player(EntityId id, PlayerName name) : base(id)
+    private Player(Guid id, PlayerName name) : base(id)
     {
         Name = name;
     }
     
-    public static Result<Player, ErrorList> Create(EntityId id, PlayerName name)
+    public static Result<Player, ErrorList> Create(Guid id, PlayerName name)
     {
-        if (id == null)
+        if (id == Guid.Empty)
             throw new ArgumentException("Player id must be provided");
         
         if (name == null)

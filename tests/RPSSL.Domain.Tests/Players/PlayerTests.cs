@@ -1,5 +1,4 @@
 ﻿using FluentAssertions;
-using RPSSL.Domain.Common.Models;
 using RPSSL.Domain.Players;
 using Xunit;
 
@@ -11,7 +10,7 @@ public class PlayerTests
     public void Create_WhenCalledWithValidIdAndName_ThenReturnsSuccessResult()
     {
         // Arrange
-        var playerId = EntityId.Create();
+        var playerId = Guid.NewGuid();
         var playerName = PlayerName.Create("Alice").Value;
 
         // Act
@@ -24,23 +23,10 @@ public class PlayerTests
     }
 
     [Fact]
-    public void Create_WhenCalledWithNullId_ThenThrowsArgumentException()
-    {
-        // Arrange
-        var playerName = PlayerName.Create("Alice").Value;
-
-        // Act
-        Action act = () => Player.Create(null, playerName);
-
-        // Assert
-        act.Should().Throw<ArgumentException>();
-    }
-
-    [Fact]
     public void Create_WhenCalledWithNullName_ThenThrowsArgumentException()
     {
         // Arrange
-        var playerId = EntityId.Create();
+        var playerId = Guid.NewGuid();
 
         // Act
         Action act = () => Player.Create(playerId, null);

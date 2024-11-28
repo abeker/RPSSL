@@ -29,7 +29,7 @@ public class PlayerRepository(InMemoryDbContext context) : IPlayerRepository
         if (player is null)
             return Result.Success<Maybe<Player>, ErrorList>(Maybe.None);
 
-        return Result.Success<Maybe<Player>, ErrorList>(Player.Create(EntityId.Create(player.Id).Value, PlayerName.Create(player.Name).Value).Value);
+        return Result.Success<Maybe<Player>, ErrorList>(Player.Create(player.Id, PlayerName.Create(player.Name).Value).Value);
     }
 
     public async Task<Result<IEnumerable<Player>, ErrorList>> GetScoreboardByPageAsync(Page page, CancellationToken cancellationToken)
@@ -51,7 +51,7 @@ public class PlayerRepository(InMemoryDbContext context) : IPlayerRepository
             .ToListAsync(cancellationToken);
 
         return playersWithWins
-            .Select(p => Player.Create(EntityId.Create(p.Id).Value, PlayerName.Create(p.Value).Value).Value)
+            .Select(p => Player.Create(p.Id, PlayerName.Create(p.Value).Value).Value)
             .ToList();
     }
 }

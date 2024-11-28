@@ -9,7 +9,6 @@ using RPSSL.Domain.Choices.Services;
 using RPSSL.Domain.Common.Collections;
 using RPSSL.Domain.Common.Errors;
 using RPSSL.Domain.Common.Errors.Extensions;
-using RPSSL.Domain.Common.Models;
 using RPSSL.Domain.Games;
 using RPSSL.Domain.Games.Persistence;
 using RPSSL.Domain.Players;
@@ -47,7 +46,7 @@ public class PlayGameCommandHandlerTests
         const Choice computerChoice = Choice.Scissors;
         const Choice playerChoice = Choice.Rock;
         var request = new PlayGameCommand("Alice", (int)playerChoice);
-        var player = Player.Create(EntityId.Create(), PlayerName.Create("Alice").Value).Value;
+        var player = Player.Create(Guid.NewGuid(), PlayerName.Create("Alice").Value).Value;
 
         playerRepositoryMock
             .Setup(repo => repo.GetByNameAsync(It.IsAny<PlayerName>(), It.IsAny<CancellationToken>()))
@@ -87,7 +86,7 @@ public class PlayGameCommandHandlerTests
     public async Task Handle_WhenRandomNumberGenerationFails_ReturnsFailureResult()
     {
         var request = new PlayGameCommand("Alice", (int)Choice.Rock);
-        var player = Player.Create(EntityId.Create(), PlayerName.Create("Alice").Value).Value;
+        var player = Player.Create(Guid.NewGuid(), PlayerName.Create("Alice").Value).Value;
 
         playerRepositoryMock
             .Setup(repo => repo.GetByNameAsync(It.IsAny<PlayerName>(), It.IsAny<CancellationToken>()))
@@ -106,7 +105,7 @@ public class PlayGameCommandHandlerTests
     public async Task Handle_WhenChoiceServiceReturnsFailure_ReturnsFailureResult()
     {
         var request = new PlayGameCommand("Alice", (int)Choice.Rock);
-        var player = Player.Create(EntityId.Create(), PlayerName.Create("Alice").Value).Value;
+        var player = Player.Create(Guid.NewGuid(), PlayerName.Create("Alice").Value).Value;
 
         playerRepositoryMock
             .Setup(repo => repo.GetByNameAsync(It.IsAny<PlayerName>(), It.IsAny<CancellationToken>()))

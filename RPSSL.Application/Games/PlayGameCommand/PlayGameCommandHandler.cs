@@ -9,7 +9,6 @@ using RPSSL.Domain.Common.Collections;
 using RPSSL.Domain.Common.Errors;
 using RPSSL.Domain.Common.Errors.Extensions;
 using RPSSL.Domain.Common.Extensions;
-using RPSSL.Domain.Common.Models;
 using RPSSL.Domain.Games;
 using RPSSL.Domain.Games.Persistence;
 using RPSSL.Domain.Players;
@@ -43,7 +42,7 @@ public class PlayGameCommandHandler(
             .Bind(randomChoice => PlayerChoice.Create(Player.Computer, randomChoice));
         
         return await playerChoiceResult.CombineToTuple(computerChoiceResult)
-            .Bind(tuple => Game.Create(EntityId.Create(), tuple.Item1.Player, tuple.Item1.Choice, tuple.Item2.Player, tuple.Item2.Choice))
+            .Bind(tuple => Game.Create(Guid.NewGuid(), tuple.Item1.Player, tuple.Item1.Choice, tuple.Item2.Player, tuple.Item2.Choice))
             .Bind(game => game.PlayRound(choiceService))
             .Tap(async game => await gameRepository.CreateAsync(game, cancellationToken))
             .Map(game => new PlayGameResponse(game.GameResult.ToString().ToLowerInvariant(), (int)game.PlayerChoice, (int)game.ComputerChoice))

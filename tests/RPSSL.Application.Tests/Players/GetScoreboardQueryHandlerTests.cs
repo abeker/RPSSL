@@ -27,8 +27,8 @@ public class GetScoreboardQueryHandlerTests
         var request = new GetScoreboardQuery(1, 10);
         var players = new List<Player>
         {
-            Player.Create(EntityId.Create(), PlayerName.Create("Alice").Value).Value,
-            Player.Create(EntityId.Create(), PlayerName.Create("Bob").Value).Value
+            Player.Create(Guid.NewGuid(), PlayerName.Create("Alice").Value).Value,
+            Player.Create(Guid.NewGuid(), PlayerName.Create("Bob").Value).Value
         };
 
         playerRepositoryMock

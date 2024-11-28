@@ -1,12 +1,12 @@
 ﻿namespace RPSSL.Domain.Common.Models;
 
-public abstract class AggregateRoot : Entity
+public abstract class AggregateRoot<T> : Entity<T>
 {
     private readonly List<IDomainEvent> domainEvents = [];
     public IReadOnlyCollection<IDomainEvent> DomainEvents => domainEvents.AsReadOnly();
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="AggregateRoot"/> class.
+    /// Initializes a new instance of the <see cref="AggregateRoot{T}"/> class.
     /// </summary>
     /// <remarks>
     /// Required by EF Core.
@@ -16,10 +16,10 @@ public abstract class AggregateRoot : Entity
     }
     
     /// <summary>
-    /// Initializes a new instance of the <see cref="AggregateRoot"/> class.
+    /// Initializes a new instance of the <see cref="AggregateRoot{T}"/> class.
     /// </summary>
     /// <param name="id">The aggregate root identifier.</param>
-    protected AggregateRoot(Guid id)
+    protected AggregateRoot(T id)
         : base(id)
     {
     }

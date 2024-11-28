@@ -7,7 +7,7 @@ using RPSSL.Domain.Players;
 
 namespace RPSSL.Domain.Games;
 
-public class Game : AggregateRoot
+public class Game : AggregateRoot<Guid>
 {
     public Player Player { get; }
     public Choice PlayerChoice { get; }

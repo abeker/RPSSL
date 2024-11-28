@@ -1,5 +1,4 @@
 ﻿using CSharpFunctionalExtensions;
-using Microsoft.EntityFrameworkCore;
 using RPSSL.Domain.Common.Collections;
 using RPSSL.Domain.Games.Persistence;
 using RPSSL.Infrastructure.Persistence.Configuration;

@@ -5,7 +5,6 @@ using RPSSL.Application.Players.Models;
 using RPSSL.Domain.Common.Collections;
 using RPSSL.Domain.Common.Errors;
 using RPSSL.Domain.Common.Errors.Extensions;
-using RPSSL.Domain.Common.Models;
 using RPSSL.Domain.Players;
 using RPSSL.Domain.Players.Persistence;
 
@@ -22,7 +21,7 @@ public class CreatePlayerCommandHandler(ILogger<CreatePlayerCommandHandler> logg
         return await playerName
             .Bind(async name => await playerRepository.GetByNameAsync(name, cancellationToken))
             .Ensure(p => p.HasNoValue, _ => new EntityAlreadyExistsError(nameof(Player)).ToList())
-            .Bind(_ => Player.Create(EntityId.Create(), playerName.Value))
+            .Bind(_ => Player.Create(Guid.NewGuid(), playerName.Value))
             .Bind(async player => await playerRepository.CreateAsync(player, cancellationToken))
             .Map(player => new PlayerResponse(player.Id, player.Name.Value))
             .Tap(() => logger.LogInformation("Player with name '{PlayerName}' successfully created", request.Name))

@@ -5,7 +5,6 @@ using Moq;
 using RPSSL.Application.Players.GetPlayerByNameQuery;
 using RPSSL.Application.Players.Models;
 using RPSSL.Domain.Common.Errors;
-using RPSSL.Domain.Common.Models;
 using RPSSL.Domain.Players;
 using RPSSL.Domain.Players.Persistence;
 using Xunit;
@@ -28,7 +27,7 @@ public class GetPlayerByNameQueryHandlerTests
     public async Task Handle_WhenPlayerExists_ReturnsPlayerResponse()
     {
         var request = new GetPlayerByNameQuery("Alice");
-        var player = Player.Create(EntityId.Create(), PlayerName.Create("Alice").Value).Value;
+        var player = Player.Create(Guid.NewGuid(), PlayerName.Create("Alice").Value).Value;
 
         playerRepositoryMock
             .Setup(repo => repo.GetByNameAsync(It.IsAny<PlayerName>(), It.IsAny<CancellationToken>()))

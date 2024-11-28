@@ -5,7 +5,6 @@ using Moq;
 using RPSSL.Application.Players.CreatePlayerCommand;
 using RPSSL.Application.Players.Models;
 using RPSSL.Domain.Common.Errors;
-using RPSSL.Domain.Common.Models;
 using RPSSL.Domain.Players;
 using RPSSL.Domain.Players.Persistence;
 using Xunit;
@@ -29,7 +28,7 @@ public class CreatePlayerCommandHandlerTests
     {
         var request = new CreatePlayerCommand("Alice");
         var playerName = PlayerName.Create("Alice").Value;
-        var player = Player.Create(EntityId.Create(), playerName).Value;
+        var player = Player.Create(Guid.NewGuid(), playerName).Value;
 
         playerRepositoryMock
             .Setup(repo => repo.GetByNameAsync(It.IsAny<PlayerName>(), It.IsAny<CancellationToken>()))
@@ -49,7 +48,7 @@ public class CreatePlayerCommandHandlerTests
     public async Task Handle_WhenPlayerAlreadyExists_ReturnsEntityAlreadyExistsError()
     {
         var request = new CreatePlayerCommand("Alice");
-        var player = Player.Create(EntityId.Create(), PlayerName.Create("Alice").Value).Value;
+        var player = Player.Create(Guid.NewGuid(), PlayerName.Create("Alice").Value).Value;
 
         playerRepositoryMock
             .Setup(repo => repo.GetByNameAsync(It.IsAny<PlayerName>(), It.IsAny<CancellationToken>()))
