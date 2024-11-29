@@ -1,5 +1,5 @@
 ﻿using RPSSL.Api.Contracts.Players;
-using RPSSL.Application.Players.CreatePlayerCommand;
+using RPSSL.Application.Players.CreatePlayer;
 
 namespace RPSSL.Api.Factories.Players;
 

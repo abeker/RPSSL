@@ -14,7 +14,7 @@ using RPSSL.Domain.Games.Persistence;
 using RPSSL.Domain.Players;
 using RPSSL.Domain.Players.Persistence;
 
-namespace RPSSL.Application.Games.PlayGameCommand;
+namespace RPSSL.Application.Games.PlayGame;
 
 public class PlayGameCommandHandler(
     IPlayerRepository playerRepository, 

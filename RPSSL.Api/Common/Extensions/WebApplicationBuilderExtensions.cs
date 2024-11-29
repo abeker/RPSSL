@@ -1,5 +1,5 @@
-﻿using RPSSL.Application.Common.Extensions;
-using RPSSL.Infrastructure.Common.Extensions;
+﻿using RPSSL.Application;
+using RPSSL.Infrastructure;
 
 namespace RPSSL.Api.Common.Extensions;
 

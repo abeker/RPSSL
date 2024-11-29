@@ -7,7 +7,7 @@ using RPSSL.Api.Contracts.Games;
 using RPSSL.Api.Factories.Games;
 using RPSSL.Application.Choices.GetChoices;
 using RPSSL.Application.Choices.GetRandomChoice;
-using RPSSL.Application.Games.PlayGameCommand;
+using RPSSL.Application.Games.PlayGame;
 
 namespace RPSSL.Api.Controllers;
 

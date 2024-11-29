@@ -8,7 +8,7 @@ using RPSSL.Domain.Common.Errors.Extensions;
 using RPSSL.Domain.Players;
 using RPSSL.Domain.Players.Persistence;
 
-namespace RPSSL.Application.Players.CreatePlayerCommand;
+namespace RPSSL.Application.Players.CreatePlayer;
 
 public class CreatePlayerCommandHandler(ILogger<CreatePlayerCommandHandler> logger, IPlayerRepository playerRepository) : ICommandHandler<CreatePlayerCommand, Result<PlayerResponse, ErrorList>>
 {

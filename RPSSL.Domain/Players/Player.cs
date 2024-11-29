@@ -2,6 +2,7 @@
 using RPSSL.Domain.Common.Collections;
 using RPSSL.Domain.Common.Guards;
 using RPSSL.Domain.Common.Models;
+using RPSSL.Domain.Players.DomainEvents;
 
 namespace RPSSL.Domain.Players;
 
@@ -32,6 +33,10 @@ public class Player : AggregateRoot<Guid>
         Ensure.NotEmpty(id, $"{nameof(Player)} {nameof(Id)} must be provided", nameof(id));
         Ensure.NotNull(name, nameof(name));
         
-        return new Player(id, name);
+        var player = new Player(id, name);
+
+        player.AddDomainEvent(new PlayerCreatedDomainEvent(player.Id));
+        
+        return player;
     }
 }

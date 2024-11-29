@@ -5,7 +5,7 @@ using RPSSL.Domain.Common.Collections;
 using RPSSL.Domain.Common.Models;
 using RPSSL.Domain.Players.Persistence;
 
-namespace RPSSL.Application.Players.GetScoreboardQuery;
+namespace RPSSL.Application.Players.GetScoreboard;
 
 public class GetScoreboardQueryHandler(ILogger<GetScoreboardQueryHandler> logger, IPlayerRepository playerRepository)
     : IRequestHandler<GetScoreboardQuery, Result<ScoreboardResponse, ErrorList>>

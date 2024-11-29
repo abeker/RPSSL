@@ -2,7 +2,7 @@
 using FluentAssertions;
 using Microsoft.Extensions.Logging;
 using Moq;
-using RPSSL.Application.Players.CreatePlayerCommand;
+using RPSSL.Application.Players.CreatePlayer;
 using RPSSL.Application.Players.Models;
 using RPSSL.Domain.Common.Errors;
 using RPSSL.Domain.Players;

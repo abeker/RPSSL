@@ -1,5 +1,7 @@
-﻿namespace RPSSL.Domain.Common.Models;
+﻿using MediatR;
 
-public interface IDomainEvent
+namespace RPSSL.Domain.Common.Models;
+
+public interface IDomainEvent : INotification
 {
 }

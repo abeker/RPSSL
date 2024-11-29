@@ -11,9 +11,9 @@ using RPSSL.Infrastructure.Configuration;
 using RPSSL.Infrastructure.Persistence;
 using RPSSL.Infrastructure.Persistence.Configuration;
 
-namespace RPSSL.Infrastructure.Common.Extensions;
+namespace RPSSL.Infrastructure;
 
-public static class ServiceCollectionExtensions
+public static class DependencyInjection
 {
     private const string DbName = "RpsslDb";
     

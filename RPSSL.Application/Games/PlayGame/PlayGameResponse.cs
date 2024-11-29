@@ -1,3 +1,3 @@
-﻿namespace RPSSL.Application.Games.PlayGameCommand;
+﻿namespace RPSSL.Application.Games.PlayGame;
 
 public record PlayGameResponse(string Results, int Player, int Computer);

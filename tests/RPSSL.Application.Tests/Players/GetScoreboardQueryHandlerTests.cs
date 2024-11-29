@@ -1,7 +1,7 @@
 ﻿using FluentAssertions;
 using Microsoft.Extensions.Logging;
 using Moq;
-using RPSSL.Application.Players.GetScoreboardQuery;
+using RPSSL.Application.Players.GetScoreboard;
 using RPSSL.Domain.Common.Models;
 using RPSSL.Domain.Players;
 using RPSSL.Domain.Players.Persistence;

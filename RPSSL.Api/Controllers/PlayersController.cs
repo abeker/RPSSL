@@ -6,8 +6,8 @@ using RPSSL.Api.Common.Errors.ErrorFactory;
 using RPSSL.Api.Contracts.Common;
 using RPSSL.Api.Contracts.Players;
 using RPSSL.Api.Factories.Players;
-using RPSSL.Application.Players.GetPlayerByNameQuery;
-using RPSSL.Application.Players.GetScoreboardQuery;
+using RPSSL.Application.Players.GetPlayerByName;
+using RPSSL.Application.Players.GetScoreboard;
 
 namespace RPSSL.Api.Controllers;
 

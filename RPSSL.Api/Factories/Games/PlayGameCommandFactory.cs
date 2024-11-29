@@ -1,5 +1,5 @@
 ﻿using RPSSL.Api.Contracts.Games;
-using RPSSL.Application.Games.PlayGameCommand;
+using RPSSL.Application.Games.PlayGame;
 
 namespace RPSSL.Api.Factories.Games;
 

@@ -5,7 +5,7 @@ using RPSSL.Api.Common.Errors;
 using RPSSL.Api.Common.Errors.ErrorFactory;
 using RPSSL.Api.Contracts.Games;
 using RPSSL.Api.Factories.Games;
-using RPSSL.Application.Games.PlayGameCommand;
+using RPSSL.Application.Games.PlayGame;
 
 namespace RPSSL.Api.Controllers;
 

@@ -25,4 +25,9 @@ public class PositiveNumber : ValueObject
     {
         yield return Value;
     }
+    
+    public static implicit operator int (PositiveNumber positiveNumber)
+    {
+        return positiveNumber.Value;
+    }
 }

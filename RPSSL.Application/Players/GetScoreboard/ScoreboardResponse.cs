@@ -1,3 +1,3 @@
-﻿namespace RPSSL.Application.Players.GetScoreboardQuery;
+﻿namespace RPSSL.Application.Players.GetScoreboard;
 
 public record ScoreboardResponse(IEnumerable<string> PlayerNames);

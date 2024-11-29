@@ -3,7 +3,7 @@ using FluentAssertions;
 using Microsoft.Extensions.Logging;
 using Moq;
 using RPSSL.Application.Choices.Persistence;
-using RPSSL.Application.Games.PlayGameCommand;
+using RPSSL.Application.Games.PlayGame;
 using RPSSL.Domain.Choices;
 using RPSSL.Domain.Choices.Services;
 using RPSSL.Domain.Common.Collections;
